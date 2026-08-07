@@ -1,0 +1,26 @@
+# Virtual Environment
+.venv/
+env/
+venv/
+
+# Vector Databases & Databases
+chroma_db/
+chroma_db_test/
+*.sqlite3
+*.db
+
+# Data & Output Files (Keep directory structures via .gitkeep)
+data/*
+!data/.gitkeep
+output/*
+!output/.gitkeep
+
+# Python Bytecode & Caches
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+
+# System Files
+.DS_Store
+Thumbs.db

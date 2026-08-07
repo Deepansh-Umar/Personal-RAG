@@ -1,0 +1,46 @@
+\documentclass[letterpaper,11pt]{article}
+\usepackage[empty]{fullpage}
+\usepackage{titlesec}
+\usepackage{hyperref}
+\usepackage{enumitem}
+
+\pagestyle{empty}
+\raggedbottom
+\raggedright
+
+% Custom section formatting
+\titleformat{\section}{
+  \vspace{-4pt}\scshape\raggedright\large
+}{}{0em}{}[\color{black}\vline height 1.5pt width \textwidth\vspace{-5pt}]
+
+\begin{document}
+
+% --- HEADER ---
+\begin{center}
+    \textbf{\Huge \scshape {{ NAME }}} \\ \vspace{1pt}
+    \small {{ TITLE }} $|$ {{ LOCATION }} $|$ \href{mailto:{{ EMAIL }}}{ {{ EMAIL }} }
+\end{center}
+
+% --- PROFESSIONAL SUMMARY ---
+\section{Summary}
+{{ SUMMARY }}
+
+% --- TAILORED EXPERIENCE ---
+\section{Relevant Experience}
+\begin{itemize}[leftmargin=0.15in, label={}]
+{{ EXPERIENCES_BLOCK }}
+\end{itemize}
+
+% --- FEATURED PROJECTS ---
+\section{Key Projects}
+\begin{itemize}[leftmargin=0.15in, label={}]
+{{ PROJECTS_BLOCK }}
+\end{itemize}
+
+% --- SKILLS ---
+\section{Technical Skills}
+\begin{itemize}[leftmargin=0.15in, label={}]
+{{ SKILLS_BLOCK }}
+\end{itemize}
+
+\end{document}
