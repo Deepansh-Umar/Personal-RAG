@@ -3,6 +3,10 @@
 env/
 venv/
 
+# Local Experimental Scripts (Will NOT be pushed to GitHub)
+local_experiments/
+scratch/
+
 # Vector Databases & Databases
 chroma_db/
 chroma_db_test/

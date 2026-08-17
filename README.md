@@ -2,11 +2,43 @@
 
 A modular, local-first Retrieval-Augmented Generation (RAG) pipeline designed to ingest personal career documents (Markdown READMEs, LaTeX files, PDFs, and YAML) and tailor them against specific Job Descriptions (JDs).
 
-Includes support for Local LLMs via Ollama, ChromaDB Vector Store, and LangGraph Agentic Workflows with self-correction loops.
+Includes support for Local LLMs via Ollama, Google Gemini API, ChromaDB Vector Store, LangGraph Agentic Workflows, and a Streamlit Web Application interface.
 
 ---
 
+## System Architecture
 
+```
+                                  [Multi-Format Ingestion Suite]
+                                 +-------------------------------+
+                                 | - Markdown READMEs (.md)      |
+                                 | - LaTeX Resumes (.tex)        |
+                                 | - PDF Documents (.pdf)        |
+                                 | - Structured YAML (.yaml)     |
+                                 | - GitHub Profile READMEs      |
+                                 +---------------+---------------+
+                                                 |
+                                                 v
+                                     [Universal Document Loader]
+                                                 |
+                                                 v
+                                   [ChromaDB / Qdrant Vector Store]
+                                                 |
+[Target Job Description] ---> [JD Parser] -------+---> [Hybrid Vector & Skill Tag Retriever]
+                                                 |
+                                                 v
+                                   [LangGraph Agentic State Flow]
+                                  (JD Parse -> Retrieve -> Grade -> Self-Correct Loop)
+                                                 |
+                                                 v
+                                    [LLM Synthesis Engine]
+                                (Gemini API / Local Ollama LLM)
+                                                 |
+                                                 v
+                                [Tailored Resumes & LaTeX Export]
+```
+
+---
 
 ## Key Features Explained
 
@@ -16,15 +48,18 @@ You can drop any of the following files into the `data/` folder:
 - **LaTeX Files (`.tex`)**: Parses LaTeX resume templates or past LaTeX documents into section blocks.
 - **PDF Documents (`.pdf`)**: Extracts text page-by-page.
 - **Structured YAML (`.yaml`)**: Stores structured STAR bullet points (Situation, Action, Result) linked to companies and tech tags.
+- **GitHub Repositories**: Automatically fetches public project READMEs from any GitHub profile URL.
 
-### 2. Local LLMs via Ollama (`src/ollama_provider.py`)
-Run private open-weight models (`llama3.2`, `mistral`, `qwen2.5`, `deepseek-r1`) locally on your machine with 0 cloud cost:
+### 2. Streamlit Web Application Interface (`app.py`)
+Launch the interactive web user interface locally or deploy to **Streamlit Community Cloud** with 1 click:
 ```bash
-# Download & launch Ollama locally: https://ollama.com
-ollama run llama3.2
+streamlit run app.py
 ```
 
-### 3. LangGraph Agentic RAG and Self-Correction (`src/langgraph_rag.py`)
+### 3. Local LLMs via Ollama & Gemini API (`src/ollama_provider.py`, `src/generator.py`)
+Run private open-weight models (`llama3.2`, `qwen2.5`, `deepseek-r1`) locally via Ollama, or enter your Gemini API key in the web interface for sub-second cloud synthesis.
+
+### 4. LangGraph Agentic RAG and Self-Correction (`src/langgraph_rag.py`)
 Rather than relying on a linear pipeline, the system uses a LangGraph State Graph:
 1. **Analyze JD**: Extracts role title and required skills.
 2. **Retrieve Context**: Queries vector store.
@@ -39,6 +74,11 @@ Rather than relying on a linear pipeline, the system uses a LangGraph State Grap
 Personal-RAG/
 |
 +-- .venv/                     # Python Virtual Environment
++-- .streamlit/                # Streamlit UI Theme Configuration
+|   +-- config.toml
+|
++-- app.py                     # Streamlit Web Application Interface
++-- main.py                    # End-to-end CLI execution script
 |
 +-- data/                      # Your career info (YAML, Markdown, LaTeX, PDF)
 |   +-- profile.yaml           # Bio summary & target roles
@@ -59,6 +99,7 @@ Personal-RAG/
 |   +-- ollama_provider.py     # Local Ollama LLM provider
 |   +-- langgraph_rag.py       # LangGraph agentic RAG workflow
 |   +-- latex_exporter.py      # LaTeX resume rendering engine
+|   +-- github_fetcher.py      # GitHub profile & repository README fetcher
 |   |
 |   +-- ingestors/             # Universal Document Ingestion Suite
 |       +-- md_ingestor.py     # Markdown README header chunker & tech tagger
@@ -70,12 +111,6 @@ Personal-RAG/
 |   +-- resume_template.tex    # Dynamic LaTeX resume template
 |
 +-- tests/                     # Pipeline tests
-|   +-- test_ingestion.py
-|   +-- test_vector_store.py
-|   +-- test_latex_export.py
-|   +-- test_universal_and_agentic.py
-|
-+-- main.py                    # End-to-end execution script
 +-- README.md
 +-- requirements.txt
 ```
@@ -99,15 +134,12 @@ source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
-### 2. Ingest Your Whole Project README / PDF / LaTeX / YAML
-Drop any project `README.md`, LaTeX resume (`.tex`), or PDF file into the `data/` directory.
-
-### 3. Run the End-to-End Pipeline
+### 2. Launch the Streamlit Web App
 ```bash
-python main.py
+streamlit run app.py
 ```
 
-### 4. Run LangGraph and Universal Ingestion Tests
-```bash
-python tests/test_universal_and_agentic.py
-```
+### 3. Deploy to Streamlit Community Cloud (Free Hosting)
+1. Push repository to GitHub.
+2. Go to [share.streamlit.io](https://share.streamlit.io).
+3. Connect your repository and select `app.py` as the main file path!
