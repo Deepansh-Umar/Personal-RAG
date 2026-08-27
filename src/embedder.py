@@ -25,7 +25,7 @@ class SentenceTransformerEmbedder(BaseEmbedder):
         self.model_name = model_name
         self.use_fallback = False
         try:
-            # pyrefly: ignore [missing-import]
+            # pyrefly: ignore [missing-import] 
             from sentence_transformers import SentenceTransformer
             self.model = SentenceTransformer(model_name)
         except Exception:

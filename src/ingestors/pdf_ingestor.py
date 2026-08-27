@@ -6,16 +6,21 @@ from src.schema import DocumentChunk
 
 class PDFIngestor:
     """
-    Parses PDF (.pdf) documents (e.g. resumes, certificates, project docs).
-    Extracts text page-by-page or by paragraph blocks and auto-tags technologies.
+    Parses PDF (.pdf) resume documents by splitting on major section headers
+    (EXPERIENCE, PROJECTS, EDUCATION, SKILLS) and individual bullet points.
+    Prevents vector dilution and maximizes RAG retrieval precision.
     """
 
     KNOWN_TECH = [
         "python", "typescript", "javascript", "react", "fastapi", "django",
-        "qdrant", "chromadb", "pgvector", "postgresql", "redis", "celery",
-        "aws", "docker", "kubernetes", "microservices", "rag", "llm",
-        "websockets", "crdt", "latex", "sql"
+        "flask", "vue.js", "sqlalchemy", "qdrant", "chromadb", "pgvector",
+        "postgresql", "redis", "celery", "aws", "docker", "kubernetes",
+        "microservices", "rag", "llm", "websockets", "crdt", "latex", "sql",
+        "pytorch", "tensorflow", "scikit-learn", "pandas", "numpy", "html",
+        "css", "git", "jwt", "rest apis"
     ]
+
+    SECTIONS = ["EXPERIENCE", "PROJECTS", "EDUCATION", "SKILLS", "CERTIFICATIONS", "KEY HIGHLIGHTS"]
 
     def _extract_tech(self, text: str) -> List[str]:
         lowered = text.lower()
@@ -33,28 +38,60 @@ class PDFIngestor:
         try:
             import pypdf
         except ImportError:
-            # Simple text fallback if pypdf is not yet installed
             print("⚠️ pypdf package not installed. Install via `pip install pypdf` for PDF parsing.")
             return []
 
         chunks: List[DocumentChunk] = []
         reader = pypdf.PdfReader(str(path))
 
-        for page_num, page in enumerate(reader.pages, 1):
-            text = page.extract_text()
-            if text and len(text.strip()) > 30:
-                clean_text = re.sub(r'\n\s*\n', '\n', text).strip()
-                tech_stack = self._extract_tech(clean_text)
+        full_text = ""
+        for page in reader.pages:
+            t = page.extract_text()
+            if t:
+                full_text += t + "\n"
+
+        if not full_text.strip():
+            return chunks
+
+        # 1. Split into Major Sections (EXPERIENCE, PROJECTS, EDUCATION, SKILLS)
+        pattern = r'(?=\b(?:' + '|'.join(self.SECTIONS) + r')\b)'
+        section_blocks = re.split(pattern, full_text)
+
+        for block in section_blocks:
+            clean_block = block.strip()
+            if len(clean_block) < 30:
+                continue
+
+            # Identify section name
+            first_line = clean_block.split("\n")[0].upper()
+            matched_section = "GENERAL"
+            for sec in self.SECTIONS:
+                if sec in first_line:
+                    matched_section = sec
+                    break
+
+            # 2. Split section into sub-bullets (by bullet symbols '', '•', '-', '*')
+            bullets = re.split(r'[\ufffd\u2022\u25cf\u25aa\u25b6\*\-]\s*', clean_block)
+
+            for b_idx, bullet in enumerate(bullets, 1):
+                clean_bullet = re.sub(r'\s+', ' ', bullet).strip()
+
+                # Filter out short lines or contact headers
+                if len(clean_bullet) < 35 or re.match(r'^(email|phone|linkedin|github|\(\+[\d\s-]+\))', clean_bullet.lower()):
+                    continue
+
+                tech_stack = self._extract_tech(clean_bullet)
+                chunk_id = f"pdf_{path.name.lower().replace('.', '_')}_{matched_section.lower()}_{b_idx}"
 
                 chunks.append(
                     DocumentChunk(
-                        chunk_id=f"pdf_{path.name.lower().replace('.', '_')}_p{page_num}",
-                        source_type="experience",
-                        title=f"PDF Document: {path.name} (Page {page_num})",
-                        content=f"Document: {path.name} (Page {page_num})\n\n{clean_text}",
+                        chunk_id=chunk_id,
+                        source_type="project" if matched_section == "PROJECTS" else "experience",
+                        title=f"{path.name} - {matched_section} (Bullet {b_idx})",
+                        content=f"Document: {path.name}\nSection: {matched_section}\nAccomplishment: {clean_bullet}",
                         tech_stack=tech_stack,
-                        domain_tags=["pdf", "resume_pdf"],
-                        metadata={"filename": path.name, "page": page_num}
+                        domain_tags=["pdf", matched_section.lower()],
+                        metadata={"filename": path.name, "section": matched_section}
                     )
                 )
 

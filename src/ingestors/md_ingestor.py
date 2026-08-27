@@ -6,8 +6,9 @@ from src.schema import DocumentChunk
 
 class MarkdownIngestor:
     """
-    Parses Markdown (.md) documents like project READMEs or notes.
-    Splits content by headers (#, ##, ###) and automatically extracts technology tags.
+    Parses Markdown (.md) project READMEs into clean, high-signal DocumentChunks.
+    Filters out boilerplate sections (Installation, Setup, License) to focus purely
+    on Features, Architecture, Tech Stack, and Technical Achievements.
     """
 
     KNOWN_TECH = [
@@ -15,7 +16,14 @@ class MarkdownIngestor:
         "qdrant", "chromadb", "pgvector", "postgresql", "redis", "celery",
         "aws", "docker", "kubernetes", "microservices", "rag", "llm",
         "websockets", "crdt", "yjs", "ci/cd", "unit testing", "ollama",
-        "langchain", "langgraph", "latex", "node.js", "express"
+        "langchain", "langgraph", "latex", "node.js", "express", "pytorch",
+        "tensorflow", "scikit-learn", "pandas", "numpy", "html", "css", "git"
+    ]
+
+    NOISE_SECTIONS = [
+        "installation", "install", "local setup", "how to run", "getting started",
+        "prerequisites", "requirements", "license", "contributing", "author",
+        "table of contents", "toc"
     ]
 
     def _extract_tech_stack(self, text: str) -> List[str]:
@@ -25,6 +33,14 @@ class MarkdownIngestor:
             if re.search(r'\b' + re.escape(tech) + r'\b', lowered):
                 found.append(tech.title() if len(tech) > 3 else tech.upper())
         return list(set(found))
+
+    def _is_noise_header(self, header_title: str) -> bool:
+        lowered = header_title.lower().strip()
+        return any(noise in lowered for noise in self.NOISE_SECTIONS)
+
+    def _clean_project_name(self, filename: str) -> str:
+        name = filename.replace("GitHub_", "").replace("_README.md", "").replace(".md", "")
+        return name.replace("_", " ").strip()
 
     def parse_file(self, file_path: Union[str, Path]) -> List[DocumentChunk]:
         path = Path(file_path)
@@ -40,26 +56,26 @@ class MarkdownIngestor:
         chunks: List[DocumentChunk] = []
         lines = markdown_text.split("\n")
 
-        current_header = filename
+        clean_repo_name = self._clean_project_name(filename)
+        current_header = clean_repo_name
         current_lines: List[str] = []
 
         for line in lines:
             if line.startswith("#"):
-                # Save previous section if non-empty
                 if current_lines:
                     section_text = "\n".join(current_lines).strip()
-                    if len(section_text) > 30:
+                    if len(section_text) > 40 and not self._is_noise_header(current_header):
                         tech_stack = self._extract_tech_stack(section_text)
-                        chunk_id = f"md_{filename.lower().replace('.', '_')}_{len(chunks)+1}"
+                        chunk_id = f"md_{clean_repo_name.lower().replace(' ', '_')}_{len(chunks)+1}"
                         chunks.append(
                             DocumentChunk(
                                 chunk_id=chunk_id,
                                 source_type="project",
-                                title=f"{filename} - {current_header}",
-                                content=f"Source Document: {filename}\nSection: {current_header}\n\n{section_text}",
+                                title=f"{clean_repo_name} ({current_header})",
+                                content=f"Project Name: {clean_repo_name}\nSection: {current_header}\n\n{section_text}",
                                 tech_stack=tech_stack,
-                                domain_tags=["markdown", "project_readme"],
-                                metadata={"filename": filename, "header": current_header}
+                                domain_tags=["markdown", "project_readme", clean_repo_name.lower()],
+                                metadata={"filename": filename, "repo_name": clean_repo_name, "header": current_header}
                             )
                         )
                     current_lines = []
@@ -67,21 +83,20 @@ class MarkdownIngestor:
             else:
                 current_lines.append(line)
 
-        # Flush final section
         if current_lines:
             section_text = "\n".join(current_lines).strip()
-            if len(section_text) > 30:
+            if len(section_text) > 40 and not self._is_noise_header(current_header):
                 tech_stack = self._extract_tech_stack(section_text)
-                chunk_id = f"md_{filename.lower().replace('.', '_')}_{len(chunks)+1}"
+                chunk_id = f"md_{clean_repo_name.lower().replace(' ', '_')}_{len(chunks)+1}"
                 chunks.append(
                     DocumentChunk(
                         chunk_id=chunk_id,
                         source_type="project",
-                        title=f"{filename} - {current_header}",
-                        content=f"Source Document: {filename}\nSection: {current_header}\n\n{section_text}",
+                        title=f"{clean_repo_name} ({current_header})",
+                        content=f"Project Name: {clean_repo_name}\nSection: {current_header}\n\n{section_text}",
                         tech_stack=tech_stack,
-                        domain_tags=["markdown", "project_readme"],
-                        metadata={"filename": filename, "header": current_header}
+                        domain_tags=["markdown", "project_readme", clean_repo_name.lower()],
+                        metadata={"filename": filename, "repo_name": clean_repo_name, "header": current_header}
                     )
                 )
 
