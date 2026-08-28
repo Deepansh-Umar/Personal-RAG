@@ -125,35 +125,32 @@ with tab1:
                 st.success("Successfully extracted latest Candidate Fact Sheet!")
 
     elif "Option B" in fact_source:
-        portfolio_url = st.text_input("Enter Resume Builder / Portfolio URL", placeholder="https://resumemate.io/user/deepansh")
+        portfolio_url = st.text_input("Enter Resume Builder / Portfolio URL", placeholder="e.g. https://resumemate.io/user/alex")
         if portfolio_url:
             st.info(f"Will link portfolio: {portfolio_url}")
 
     elif "Option C" in fact_source:
         col_a, col_b = st.columns(2)
         with col_a:
-            name = st.text_input("Full Name", value="Deepansh Umar")
-            email = st.text_input("Email", value="umardeepansh@gmail.com")
-            phone = st.text_input("Phone", value="(+91) 9581730273")
+            name = st.text_input("Full Name", placeholder="e.g. Alex Johnson")
+            email = st.text_input("Email", placeholder="e.g. alex@example.com")
+            phone = st.text_input("Phone", placeholder="e.g. (+1) 555-0199")
         with col_b:
-            linkedin = st.text_input("LinkedIn URL", value="https://linkedin.com")
-            github = st.text_input("GitHub URL", value="https://github.com/Deepansh-Umar")
+            linkedin = st.text_input("LinkedIn URL", placeholder="e.g. https://linkedin.com/in/alexjohnson")
+            github = st.text_input("GitHub Profile URL", placeholder="e.g. https://github.com/alexjohnson")
 
         fact_sheet = ProfileFactSheet(
-            name=name, email=email, phone=phone, linkedin=linkedin, github=github,
-            educations=[
-                EducationFact(institution="Indian Institute of Technology Madras", degree="Bachelor of Science in Data Science and Applications", dates="2024 – Present", cgpa_or_details="CGPA: 9.23"),
-                EducationFact(institution="Institute of Aeronautical Engineering, Hyderabad", degree="Bachelor of Technology in Computer Science", dates="2024 – Present", cgpa_or_details="CGPA: 8.6")
-            ]
+            name=name, email=email, phone=phone, linkedin=linkedin, github=github
         )
 
     st.session_state.fact_sheet = fact_sheet
 
-    # Display Active Fact Sheet Summary
-    with st.expander("📋 View Active Fact Sheet (Guaranteed Fact Accuracy)"):
-        st.write(f"**Name**: {fact_sheet.name} | **Email**: {fact_sheet.email} | **Phone**: {fact_sheet.phone}")
-        for edu in fact_sheet.educations:
-            st.write(f"- **{edu.institution}**: {edu.degree} ({edu.dates}) - {edu.cgpa_or_details}")
+    # Display Active Fact Sheet Summary if populated
+    if fact_sheet.name or fact_sheet.email or fact_sheet.educations:
+        with st.expander("📋 View Active Fact Sheet (Guaranteed Fact Accuracy)"):
+            st.write(f"**Name**: {fact_sheet.name} | **Email**: {fact_sheet.email} | **Phone**: {fact_sheet.phone}")
+            for edu in fact_sheet.educations:
+                st.write(f"- **{edu.institution}**: {edu.degree} ({edu.dates}) {edu.cgpa_or_details or ''}")
 
     st.markdown("---")
 
@@ -163,7 +160,7 @@ with tab1:
     col1, col2 = st.columns([1, 1])
 
     with col1:
-        github_url = st.text_input("GitHub Profile URL (Fetches repos & exact live URLs)", value="https://github.com/Deepansh-Umar")
+        github_url = st.text_input("GitHub Profile URL (Fetches repos & exact live URLs)", placeholder="e.g. https://github.com/username")
         uploaded_project_files = st.file_uploader("Upload additional project READMEs or docs", type=["pdf", "md", "yaml"], accept_multiple_files=True)
 
     with col2:
