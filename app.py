@@ -13,7 +13,7 @@ st.set_page_config(
 )
 
 # Add project root to path
-sys.path.insert(0, str(Path(__file__).parent))
+sys.path.insert(0, str(Path(__file__).parent.resolve()))
 
 from src.schema import CareerData, DocumentChunk
 from src.fact_extractor import FactExtractor, ProfileFactSheet, EducationFact

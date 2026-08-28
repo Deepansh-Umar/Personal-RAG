@@ -1,3 +1,1 @@
-"""
-Ingestors package for multi-format document parsing (Markdown, PDF, LaTeX, YAML).
-"""
+# Empty __init__.py for ingestors package
