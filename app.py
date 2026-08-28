@@ -16,6 +16,7 @@ st.set_page_config(
 sys.path.insert(0, str(Path(__file__).parent))
 
 from src.schema import CareerData, DocumentChunk
+from src.fact_extractor import FactExtractor, ProfileFactSheet, EducationFact
 from src.loader import DataIngestionLoader
 from src.serializer import CareerChunkSerializer
 from src.ingestors.universal_loader import UniversalDocumentLoader
@@ -23,10 +24,9 @@ from src.github_fetcher import GitHubProfileIngestor
 from src.embedder import SentenceTransformerEmbedder
 from src.store import VectorStore
 from src.jd_parser import HeuristicJDParser
-from src.retriever import HybridRetriever
-from src.generator import CareerRAGGenerator
-from src.langgraph_rag import LangGraphCareerAgent
-from src.latex_exporter import LaTeXResumeExporter
+from src.retriever import HierarchicalRetriever
+from src.md_resume_generator import DynamicMarkdownResumeGenerator
+from src.ollama_provider import OllamaLLMProvider
 
 # Custom CSS styling
 st.markdown("""
@@ -44,17 +44,13 @@ st.markdown("""
         font-size: 1.1rem;
         margin-bottom: 1.5rem;
     }
-    .card {
+    .step-header {
         background-color: #1e293b;
-        border: 1px solid #334155;
-        border-radius: 12px;
-        padding: 1.5rem;
+        border-left: 4px solid #6366f1;
+        padding: 0.8rem 1rem;
+        border-radius: 6px;
         margin-bottom: 1rem;
-    }
-    .metric-container {
-        display: flex;
-        gap: 1rem;
-        margin-bottom: 1rem;
+        font-weight: 700;
     }
 </style>
 """, unsafe_allow_html=True)
@@ -65,20 +61,20 @@ if "indexed" not in st.session_state:
     st.session_state.indexed = False
 if "retrieved_chunks" not in st.session_state:
     st.session_state.retrieved_chunks = []
-if "rag_output" not in st.session_state:
-    st.session_state.rag_output = ""
-if "latex_content" not in st.session_state:
-    st.session_state.latex_content = ""
+if "markdown_resume" not in st.session_state:
+    st.session_state.markdown_resume = ""
+if "fact_sheet" not in st.session_state:
+    st.session_state.fact_sheet = ProfileFactSheet()
 
 
-# Sidebar Configuration
+# Sidebar Settings
 with st.sidebar:
     st.image("https://img.icons8.com/isometric/96/brain.png", width=64)
     st.title("Settings & Keys")
 
     api_provider = st.selectbox(
         "LLM Provider",
-        ["Google Gemini API", "Local Ollama (100% Private)", "Demonstration Mode"]
+        ["Google Gemini API", "Local Ollama (qwen2.5-coder:3b)", "Demonstration Mode"]
     )
 
     gemini_key = ""
@@ -93,63 +89,100 @@ with st.sidebar:
 
     st.markdown("---")
     st.subheader("RAG Parameters")
-    top_k = st.slider("Top-K Retrieved Context Chunks", min_value=2, max_value=8, value=5)
-    use_langgraph = st.checkbox("Enable LangGraph Agentic Loops", value=True)
+    top_projects = st.slider("Top Projects to Discover", min_value=2, max_value=6, value=4)
 
     st.markdown("---")
-    st.info("💡 **Hosted Version Note**: End-users can upload personal career documents and enter their API key. Data is processed ephemerally in memory.")
+    st.info("💡 **2-Tier Hybrid RAG**: Tier 1 Fact Sheet guarantees 100% factual education/contact accuracy. Tier 2 RAG vector engine dynamically discovers matching GitHub projects.")
 
 
-# App Header
+# Header
 st.markdown('<div class="main-title">Personal Career RAG & Resume Assistant</div>', unsafe_allow_html=True)
-st.markdown('<div class="sub-title">AI-Powered Career Document Matching, JD Analysis & ATS Resume Generator</div>', unsafe_allow_html=True)
+st.markdown('<div class="sub-title">Hybrid Fact Sheet + Dynamic RAG Vector Engine for ATS Markdown Resumes</div>', unsafe_allow_html=True)
 
 
 # Main Interface Tabs
-tab1, tab2, tab3 = st.tabs(["🚀 Analyze & Match", "📄 Resume & LaTeX Output", "ℹ️ How It Works"])
+tab1, tab2, tab3 = st.tabs(["🚀 Analyze & Generate Resume", "📄 Tailored Markdown Resume", "ℹ️ How It Works"])
 
 with tab1:
+    # STEP 1: Mandatory Fact Sheet Setup
+    st.markdown('<div class="step-header">📌 Step 1: Candidate Fact Sheet Setup (Mandatory)</div>', unsafe_allow_html=True)
+
+    fact_source = st.radio(
+        "Choose how to initialize your Fact Sheet:",
+        ["Option A: Upload Existing Resume (Auto-extract latest facts)", "Option B: Link to ResumeBuilder / Portfolio", "Option C: Enter Basic Details Manually"],
+        horizontal=True
+    )
+
+    fact_sheet = ProfileFactSheet()
+
+    if "Option A" in fact_source:
+        uploaded_resume = st.file_uploader("Upload your latest Resume (PDF / MD / YAML)", type=["pdf", "md", "yaml"])
+        if uploaded_resume:
+            with tempfile.NamedTemporaryFile(suffix=Path(uploaded_resume.name).suffix, delete=False) as tf:
+                tf.write(uploaded_resume.getbuffer())
+                extractor = FactExtractor()
+                fact_sheet = extractor.resolve_recency(tf.name)
+                st.success("Successfully extracted latest Candidate Fact Sheet!")
+
+    elif "Option B" in fact_source:
+        portfolio_url = st.text_input("Enter Resume Builder / Portfolio URL", placeholder="https://resumemate.io/user/deepansh")
+        if portfolio_url:
+            st.info(f"Will link portfolio: {portfolio_url}")
+
+    elif "Option C" in fact_source:
+        col_a, col_b = st.columns(2)
+        with col_a:
+            name = st.text_input("Full Name", value="Deepansh Umar")
+            email = st.text_input("Email", value="umardeepansh@gmail.com")
+            phone = st.text_input("Phone", value="(+91) 9581730273")
+        with col_b:
+            linkedin = st.text_input("LinkedIn URL", value="https://linkedin.com")
+            github = st.text_input("GitHub URL", value="https://github.com/Deepansh-Umar")
+
+        fact_sheet = ProfileFactSheet(
+            name=name, email=email, phone=phone, linkedin=linkedin, github=github,
+            educations=[
+                EducationFact(institution="Indian Institute of Technology Madras", degree="Bachelor of Science in Data Science and Applications", dates="2024 – Present", cgpa_or_details="CGPA: 9.23"),
+                EducationFact(institution="Institute of Aeronautical Engineering, Hyderabad", degree="Bachelor of Technology in Computer Science", dates="2024 – Present", cgpa_or_details="CGPA: 8.6")
+            ]
+        )
+
+    st.session_state.fact_sheet = fact_sheet
+
+    # Display Active Fact Sheet Summary
+    with st.expander("📋 View Active Fact Sheet (Guaranteed Fact Accuracy)"):
+        st.write(f"**Name**: {fact_sheet.name} | **Email**: {fact_sheet.email} | **Phone**: {fact_sheet.phone}")
+        for edu in fact_sheet.educations:
+            st.write(f"- **{edu.institution}**: {edu.degree} ({edu.dates}) - {edu.cgpa_or_details}")
+
+    st.markdown("---")
+
+    # STEP 2: Projects & JD Input
+    st.markdown('<div class="step-header">🐙 Step 2: Ingest Projects (GitHub & Documents) + Target Job Description</div>', unsafe_allow_html=True)
+
     col1, col2 = st.columns([1, 1])
 
     with col1:
-        st.subheader("1️⃣ Upload Personal Career Documents")
-
-        # Option A: File Upload
-        uploaded_files = st.file_uploader(
-            "Upload Resumes, Projects, READMEs, PDFs, or YAML",
-            type=["pdf", "md", "tex", "yaml", "yml"],
-            accept_multiple_files=True
-        )
-
-        # Option B: GitHub Import
-        st.markdown("**OR Import From GitHub**")
-        github_url = st.text_input("GitHub Username or Profile URL", placeholder="https://github.com/Deepansh-Umar")
-
-        fetch_github = st.button("🐙 Fetch GitHub Repos & READMEs", use_container_width=True)
+        github_url = st.text_input("GitHub Profile URL (Fetches repos & exact live URLs)", value="https://github.com/Deepansh-Umar")
+        uploaded_project_files = st.file_uploader("Upload additional project READMEs or docs", type=["pdf", "md", "yaml"], accept_multiple_files=True)
 
     with col2:
-        st.subheader("2️⃣ Target Job Description (JD)")
-        jd_text = st.text_area(
-            "Paste the Job Description here",
-            height=260,
-            placeholder="Paste role responsibilities, tech stack requirements, and qualifications..."
-        )
+        jd_text = st.text_area("Paste Target Job Description (JD)", height=200, placeholder="Paste role requirements, tech stack, and qualifications...")
 
     st.markdown("---")
-    process_btn = st.button("🔥 Run Career RAG Analysis", type="primary", use_container_width=True)
+    process_btn = st.button("🔥 Generate Tailored Markdown Resume", type="primary", use_container_width=True)
 
     if process_btn:
         if not jd_text.strip():
             st.warning("Please paste a Job Description before running analysis.")
         else:
-            with st.spinner("Ingesting documents, indexing vector store, and running RAG pipeline..."):
+            with st.spinner("Executing Tier 1 Fact Sheet + Tier 2 Dynamic Vector Search..."):
                 all_chunks = []
 
-                # Ingest uploaded files
-                if uploaded_files:
+                if uploaded_project_files:
                     with tempfile.TemporaryDirectory() as temp_dir:
                         temp_path = Path(temp_dir)
-                        for file in uploaded_files:
+                        for file in uploaded_project_files:
                             file_path = temp_path / file.name
                             with open(file_path, "wb") as f:
                                 f.write(file.getbuffer())
@@ -157,110 +190,68 @@ with tab1:
                         universal_loader = UniversalDocumentLoader()
                         all_chunks.extend(universal_loader.load_directory(temp_path))
 
-                # Ingest local sample data if no files uploaded
-                if not all_chunks and not fetch_github:
+                if not all_chunks and not github_url.strip():
                     sample_dir = Path(__file__).parent / "data"
                     if sample_dir.exists():
                         universal_loader = UniversalDocumentLoader()
                         all_chunks.extend(universal_loader.load_directory(sample_dir))
 
-                # Ingest GitHub if specified
                 if github_url.strip():
                     gh_ingestor = GitHubProfileIngestor()
                     gh_chunks = gh_ingestor.ingest_github_profile(github_url)
                     all_chunks.extend(gh_chunks)
 
                 if not all_chunks:
-                    st.error("No valid document chunks found. Please upload documents or enter a valid GitHub username.")
+                    st.error("No project chunks found. Please upload project documents or enter a GitHub username.")
                 else:
-                    st.success(f"Successfully processed {len(all_chunks)} searchable career chunks!")
-
-                    # Vector Indexing
                     embedder = SentenceTransformerEmbedder("all-MiniLM-L6-v2")
                     vector_store = VectorStore(
-                        collection_name="streamlit_career_chunks",
+                        collection_name="app_rag_collection",
                         persist_dir=None,
                         embedder=embedder
                     )
                     vector_store.add_chunks(all_chunks)
 
-                    # Retrieval & Synthesis
-                    if use_langgraph:
-                        agent = LangGraphCareerAgent(vector_store)
-                        state = agent.execute(jd_text)
-                        retrieved = state["retrieved_chunks"]
-                        output = state["final_output"]
+                    jd_parser = HeuristicJDParser()
+                    parsed_jd = jd_parser.parse(jd_text)
+
+                    retriever = HierarchicalRetriever(vector_store)
+                    retrieved_context = retriever.retrieve_resume_context(parsed_jd, top_project_count=top_projects)
+
+                    md_gen = DynamicMarkdownResumeGenerator()
+                    prompt = md_gen.construct_prompt(parsed_jd, retrieved_context, fact_sheet=st.session_state.fact_sheet)
+
+                    if api_provider == "Local Ollama (qwen2.5-coder:3b)":
+                        ollama = OllamaLLMProvider(model_name="qwen2.5-coder:3b")
+                        res_text = ollama.generate(prompt, timeout_sec=180)
                     else:
-                        jd_parser = HeuristicJDParser()
-                        parsed_jd = jd_parser.parse(jd_text)
-                        retriever = HybridRetriever(vector_store)
-                        retrieved = retriever.retrieve_context(parsed_jd, top_k=top_k)
-                        generator = CareerRAGGenerator()
-                        output = generator.generate_tailored_content(parsed_jd, retrieved)
+                        res_text = md_gen.generate_markdown_resume(parsed_jd, retrieved_context, fact_sheet=st.session_state.fact_sheet)
 
-                    st.session_state.retrieved_chunks = retrieved
-                    st.session_state.rag_output = output
+                    st.session_state.retrieved_context = retrieved_context
+                    st.session_state.markdown_resume = res_text
                     st.session_state.indexed = True
-
-                    # Generate LaTeX Output
-                    try:
-                        template_path = Path(__file__).parent / "templates" / "resume_template.tex"
-                        if template_path.exists():
-                            loader = DataIngestionLoader(Path(__file__).parent / "data")
-                            career_data = loader.load_all()
-                            exporter = LaTeXResumeExporter(template_path)
-                            with tempfile.NamedTemporaryFile(suffix=".tex", delete=False) as tf:
-                                exporter.export(career_data, retrieved, Path(tf.name))
-                                with open(tf.name, "r", encoding="utf-8") as f:
-                                    st.session_state.latex_content = f.read()
-                    except Exception as e:
-                        st.session_state.latex_content = f"% Error generating LaTeX: {e}"
 
                     st.rerun()
 
 with tab2:
-    if st.session_state.indexed and st.session_state.rag_output:
-        st.subheader("📋 RAG Analysis & ATS Bullet Recommendations")
-        st.markdown(st.session_state.rag_output)
+    if st.session_state.indexed and st.session_state.markdown_resume:
+        st.subheader("📄 Tailored Markdown Resume (.md)")
+        st.markdown(st.session_state.markdown_resume)
 
         st.markdown("---")
-        st.subheader("🔍 Top Retrieved Context Chunks")
-        for idx, chunk in enumerate(st.session_state.retrieved_chunks, 1):
-            with st.expander(f"Chunk #{idx}: {chunk['metadata'].get('title', 'N/A')} (Similarity Score: {chunk['similarity_score']})"):
-                st.markdown(f"**Source Type**: `{chunk['metadata'].get('source_type', 'N/A')}`")
-                st.markdown(f"**Tech Stack**: `{chunk['metadata'].get('tech_stack', 'N/A')}`")
-                st.text(chunk["content"])
-
-        if st.session_state.latex_content:
-            st.markdown("---")
-            st.subheader("📄 Tailored LaTeX Resume Code")
-            st.code(st.session_state.latex_content, language="latex")
-            st.download_button(
-                label="📥 Download Tailored LaTeX Resume (.tex)",
-                data=st.session_state.latex_content,
-                file_name="tailored_resume.tex",
-                mime="text/x-tex",
-                use_container_width=True
-            )
+        st.download_button(
+            label="📥 Download Tailored Markdown Resume (.md)",
+            data=st.session_state.markdown_resume,
+            file_name="tailored_resume.md",
+            mime="text/markdown",
+            use_container_width=True
+        )
     else:
-        st.info("👈 Please run an analysis in the 'Analyze & Match' tab to view tailored resume recommendations and LaTeX outputs.")
+        st.info("👈 Run an analysis in the 'Analyze & Generate Resume' tab to view your tailored Markdown resume.")
 
 with tab3:
-    st.subheader("Architecture & How It Works")
+    st.subheader("2-Tier Hybrid Architecture")
     st.markdown("""
-    ### 🏗️ System Architecture
-
-    1. **Multi-Format Ingestion Engine**:
-       - Converts Markdown READMEs (`.md`), PDFs (`.pdf`), LaTeX resumes (`.tex`), and YAML (`.yaml`) into metadata-enriched chunks.
-       - Can pull public repository READMEs directly via the **GitHub REST API**.
-
-    2. **Local Vector Store & Embeddings**:
-       - Powered by **ChromaDB** and HuggingFace **SentenceTransformers (`all-MiniLM-L6-v2`)**.
-       - Calculates 384-dimensional cosine similarity embeddings in memory.
-
-    3. **Hybrid Retriever**:
-       - Combines dense semantic vector search with technology tag boosting to ensure mandatory JD skills match.
-
-    4. **LangGraph Agentic Workflow**:
-       - Runs stateful agent nodes: `Parse JD -> Retrieve Chunks -> Grade Relevance -> Self-Correction Loop -> LLM Synthesis`.
+    - **Tier 1 (Date-Prioritized Fact Sheet)**: Resolves version conflicts by prioritizing your latest resume data for Education, Degrees, CGPA, and Contact info.
+    - **Tier 2 (RAG Vector Engine)**: Dynamically searches GitHub repositories and PDF documents to discover matching projects, extracting exact Repo & Live Hosted URLs.
     """)
