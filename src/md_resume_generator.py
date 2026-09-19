@@ -9,7 +9,7 @@ class DynamicMarkdownResumeGenerator:
     Pure RAG Markdown Resume Generator.
     Combines:
     1. Tier 1: Fact Sheet (Name, Email, Phone, LinkedIn, GitHub, Date-prioritized Educations).
-    2. Tier 2: Vector DB Retrieved Projects & Experiences (with exact GitHub Repo & Live URLs).
+    2. Tier 2: Vector DB / Full-Context Selected Projects & Experiences (with exact GitHub Repo & Live URLs).
     """
 
     def __init__(self, api_key: Optional[str] = None, model_name: str = "gemini-2.5-flash"):
@@ -31,18 +31,23 @@ class DynamicMarkdownResumeGenerator:
         fact_sheet: Optional[ProfileFactSheet] = None
     ) -> str:
 
-        # Default Fact Sheet if not provided
         if not fact_sheet:
             fact_sheet = ProfileFactSheet()
 
         # Format Education Facts string
         edu_lines = []
-        for edu in fact_sheet.educations:
-            detail_str = f" ({edu.cgpa_or_details})" if edu.cgpa_or_details else ""
-            edu_lines.append(f"- **{edu.institution}** | {edu.dates}  \n  *{edu.degree}*{detail_str}")
+        if fact_sheet.educations:
+            for edu in fact_sheet.educations:
+                detail_str = f" ({edu.cgpa_or_details})" if edu.cgpa_or_details else ""
+                edu_lines.append(f"- **{edu.institution}** | {edu.dates}  \n  *{edu.degree}*{detail_str}")
+        else:
+            edu_lines = [
+                "- **Indian Institute of Technology Madras** | 2024 – Present  \n  *Bachelor of Science in Data Science and Applications* (CGPA: 9.23 / 10.0)",
+                "- **Institute of Aeronautical Engineering, Hyderabad** | 2024 – Present  \n  *Bachelor of Technology in Computer Science and Engineering* (CGPA: 8.6 / 10.0)"
+            ]
         education_facts_str = "\n".join(edu_lines)
 
-        # Format Dynamically Retrieved Projects with exact Repo and Live URLs
+        # Format Dynamically Selected Projects with exact Repo and Live URLs
         project_blocks = []
         for proj_title, chunks in retrieved_context.get("selected_projects", []):
             sample_meta = chunks[0]["metadata"] if chunks else {}
@@ -62,13 +67,16 @@ class DynamicMarkdownResumeGenerator:
         exp_blocks = [f"- {c['content']}" for c in retrieved_context.get("experience_chunks", [])]
         exp_str = "\n".join(exp_blocks)
 
+        # Handle responsibilities property compatibility
+        resps = getattr(parsed_jd, 'core_responsibilities', getattr(parsed_jd, 'key_responsibilities', []))
+
         prompt = f"""
 You are an expert ATS Resume Strategist and Technical Career Coach. 
-Your goal is to generate a **Tailored Markdown Resume (.md)** using the candidate's Fact Sheet for Education/Header, and the RAG-retrieved projects/accomplishments for experience.
+Your goal is to generate a **Tailored Markdown Resume (.md)** using the candidate's authentic Fact Sheet for Education/Header, and the retrieved projects/accomplishments for experience.
 
 ================ CANDIDATE MANDATORY FACT SHEET (TIER 1) ================
-Name: {fact_sheet.name}
-Contact Line: `{fact_sheet.email}` | `{fact_sheet.phone}` | [LinkedIn]({fact_sheet.linkedin}) | [GitHub]({fact_sheet.github})
+Name: {fact_sheet.name or 'Deepansh Umar'}
+Contact Line: `{fact_sheet.email or 'umardeepansh@gmail.com'}` | `{fact_sheet.phone or '(+91) 9581730273'}` | [LinkedIn]({fact_sheet.linkedin or 'https://linkedin.com/in/deepansh-umar'}) | [GitHub]({fact_sheet.github or 'https://github.com/Deepansh-Umar'})
 
 Education Facts (MUST BE EXACT):
 {education_facts_str}
@@ -77,8 +85,8 @@ Experience Facts:
 - {fact_sheet.latest_role or 'Student Mentor – e-DAM IARE (Sept 2025 – Present)'}
 
 ================ MANDATORY STYLING & SECTION ORDER ================
-1. `# {fact_sheet.name}`
-   `{fact_sheet.email}` | `{fact_sheet.phone}` | [LinkedIn]({fact_sheet.linkedin}) | [GitHub]({fact_sheet.github})
+1. `# {fact_sheet.name or 'Deepansh Umar'}`
+   `{fact_sheet.email or 'umardeepansh@gmail.com'}` | `{fact_sheet.phone or '(+91) 9581730273'}` | [LinkedIn]({fact_sheet.linkedin or 'https://linkedin.com/in/deepansh-umar'}) | [GitHub]({fact_sheet.github or 'https://github.com/Deepansh-Umar'})
 
 2. `## EDUCATION`
    {education_facts_str}
@@ -87,8 +95,8 @@ Experience Facts:
    - Use retrieved experience context. Start bullet points with strong action verbs.
 
 4. `## PROJECTS`
-   - Use ONLY the dynamically retrieved projects below.
-   - Preserving the exact Markdown Project Header links: `### [Project Name](repo_url) | [Live Demo](live_url)` if live demo URL exists.
+   - Use ONLY the selected candidate projects below.
+   - Preserve exact Markdown Project Header links: `### [Project Name](repo_url) | [Live Demo](live_url)` if live demo URL exists.
    - For each project, write 2 to 3 high-impact STAR bullet points tailored to the target Job Description.
 
 5. `## TECHNICAL SKILLS`
@@ -105,16 +113,16 @@ Title: {parsed_jd.title}
 Company: {parsed_jd.company}
 Required Tech/Skills: {', '.join(parsed_jd.required_skills)}
 Key Responsibilities:
-{chr(10).join('- ' + r for r in parsed_jd.key_responsibilities)}
+{chr(10).join('- ' + r for r in resps)}
 
-================ DYNAMICALLY RETRIEVED PROJECTS WITH EXACT URLS (TIER 2) ================
+================ SELECTED CANDIDATE PROJECTS WITH EXACT URLS (TIER 2) ================
 {projects_str}
 
 ================ RETRIEVED EXPERIENCES & SKILLS ================
 {exp_str}
 
 ================ OUTPUT INSTRUCTION ================
-Output ONLY the clean, tailored Markdown Resume (.md) inside a ```markdown ... ``` block. Zero hallucinated education dates or broken URLs.
+Output ONLY the clean, tailored Markdown Resume (.md) inside a ```markdown ... ``` block. Zero hallucinated education dates, zero fake companies, zero broken URLs.
 """
         return prompt
 
@@ -138,6 +146,6 @@ Output ONLY the clean, tailored Markdown Resume (.md) inside a ```markdown ... `
         else:
             return (
                 "ℹ️ **Local Demonstration Mode (No GEMINI_API_KEY provided)**\n"
-                "Here is the structured prompt constructed for Tier 1 Fact Sheet + Tier 2 RAG generation:\n\n"
+                "Here is the structured prompt constructed for Tier 1 Fact Sheet + Tier 2 Full-Context Selection:\n\n"
                 + prompt
             )

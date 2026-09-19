@@ -1,46 +1,124 @@
-\documentclass[letterpaper,11pt]{article}
+\documentclass[letterpaper,10pt]{article}
+
+\usepackage{latexsym}
 \usepackage[empty]{fullpage}
 \usepackage{titlesec}
-\usepackage{hyperref}
+\usepackage{marvosym}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{verbatim}
 \usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage{fancyhdr}
+\usepackage[english]{babel}
+\usepackage{tabularx}
 
-\pagestyle{empty}
+\pagestyle{fancy}
+\fancyhf{} % clear all header and footer fields
+\fancyfoot{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% Adjust margins
+\addtolength{\oddsidemargin}{-0.5in}
+\addtolength{\evensidemargin}{-0.5in}
+\addtolength{\textwidth}{1in}
+\addtolength{\topmargin}{-.5in}
+\addtolength{\textheight}{1.0in}
+
+\urlstyle{same}
+
 \raggedbottom
 \raggedright
+\setlength{\tabcolsep}{0in}
 
-% Custom section formatting
+% Sections formatting
 \titleformat{\section}{
   \vspace{-4pt}\scshape\raggedright\large
-}{}{0em}{}[\color{black}\vline height 1.5pt width \textwidth\vspace{-5pt}]
+}{}{0em}{}[\color{black}\hline \vspace{-5pt}]
+
+% Custom commands
+\newcommand{\resumeItem}[2]{
+  \item\small{
+    \textbf{#1}{: #2 \vspace{-2pt}}
+  }
+}
+
+\newcommand{\resumeBullet}[1]{
+  \item\small{
+    {#1 \vspace{-2pt}}
+  }
+}
+
+\newcommand{\resumeSubheading}[4]{
+  \vspace{-1pt}\item
+    \begin{tabular*}{0.97\textwidth}[t]{l@{\extracolsep{\fill}}r}
+      \textbf{#1} & #2 \\
+      \textit{\small#3} & \textit{\small #4} \\
+    \end{tabular*}\vspace{-5pt}
+}
+
+\newcommand{\resumeProjectHeading}[2]{
+    \vspace{-1pt}\item
+    \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
+      \small#1 & #2 \\
+    \end{tabular*}\vspace{-5pt}
+}
+
+\newcommand{\resumeSubItem}[2]{\resumeItem{#1}{#2}\vspace{-4pt}}
+
+\renewcommand{\labelitemii}{$\circ$}
+
+\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=*]}
+\newcommand{\resumeSubHeadingListEnd}{\end{itemize}}
+\newcommand{\resumeItemListStart}{\begin{itemize}}
+\newcommand{\resumeItemListEnd}{\end{itemize}\vspace{-5pt}}
+
+%-------------------------------------------
+%%%%%%  CV STARTS HERE  %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{document}
 
-% --- HEADER ---
+%----------HEADING-----------------
 \begin{center}
     \textbf{\Huge \scshape {{ NAME }}} \\ \vspace{1pt}
-    \small {{ TITLE }} $|$ {{ LOCATION }} $|$ \href{mailto:{{ EMAIL }}}{ {{ EMAIL }} }
+    \small {{ PHONE }} $|$ \href{mailto:{{ EMAIL }}}{\underline{{{ EMAIL }}}} $|$ 
+    \href{{{ LINKEDIN }}}{\underline{LinkedIn}} $|$
+    \href{{{ GITHUB }}}{\underline{GitHub}}
 \end{center}
 
-% --- PROFESSIONAL SUMMARY ---
-\section{Summary}
-{{ SUMMARY }}
 
-% --- TAILORED EXPERIENCE ---
-\section{Relevant Experience}
-\begin{itemize}[leftmargin=0.15in, label={}]
+%-----------EDUCATION-----------------
+\section{Education}
+  \resumeSubHeadingListStart
+{{ EDUCATION_BLOCK }}
+  \resumeSubHeadingListEnd
+
+
+%-----------EXPERIENCE-----------------
+\section{Experience}
+  \resumeSubHeadingListStart
 {{ EXPERIENCES_BLOCK }}
-\end{itemize}
+  \resumeSubHeadingListEnd
 
-% --- FEATURED PROJECTS ---
-\section{Key Projects}
-\begin{itemize}[leftmargin=0.15in, label={}]
+
+%-----------PROJECTS-----------------
+\section{Projects}
+  \resumeSubHeadingListStart
 {{ PROJECTS_BLOCK }}
-\end{itemize}
+  \resumeSubHeadingListEnd
 
-% --- SKILLS ---
+
+%-----------TECHNICAL SKILLS-----------
 \section{Technical Skills}
-\begin{itemize}[leftmargin=0.15in, label={}]
-{{ SKILLS_BLOCK }}
-\end{itemize}
+ \begin{itemize}[leftmargin=0.15in, label={}]
+    \small{\item{
+     \textbf{Programming Languages}{: {{ LANGUAGES }}} \\
+     \textbf{Backend \& APIs}{: {{ BACKEND_SKILLS }}} \\
+     \textbf{AI, ML \& NLP}{: {{ AIML_SKILLS }}} \\
+     \textbf{Databases \& Storage}{: {{ DATABASE_SKILLS }}} \\
+     \textbf{Tools \& Infrastructure}{: {{ TOOLS_SKILLS }}}
+    }}
+ \end{itemize}
 
+%-------------------------------------------
 \end{document}

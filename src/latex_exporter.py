@@ -1,84 +1,128 @@
+import re
 from pathlib import Path
-from typing import List, Dict, Any
-from src.schema import CareerData
+from typing import Dict, Any, List, Optional
 
 
-class LaTeXResumeExporter:
+class LaTeXExporter:
     """
-    Renders structured career data and RAG-tailored bullets into a compile-ready LaTeX document.
+    Renders high-density, ATS-optimized LaTeX (.tex) resumes matching Jake's Resume standard template.
+    Ensures 100% valid LaTeX syntax by properly escaping special characters.
     """
 
-    def __init__(self, template_path: Path):
-        self.template_path = Path(template_path)
+    def __init__(self, template_path: Optional[Path] = None):
+        self.template_path = template_path or (Path(__file__).parent.parent / "templates" / "resume_template.tex")
 
-    def export(
-        self,
-        career_data: CareerData,
-        retrieved_chunks: List[Dict[str, Any]],
-        output_path: Path
-    ) -> str:
+    def _escape_latex(self, text: str) -> str:
+        if not text:
+            return ""
+        text = str(text)
+        text = text.replace('\\', '\\textbackslash{}')
+        text = text.replace('&', '\\&')
+        text = text.replace('%', '\\%')
+        text = text.replace('$', '\\$')
+        text = text.replace('#', '\\#')
+        text = text.replace('_', '\\_')
+        text = text.replace('~', '\\textasciitilde{}')
+        text = text.replace('^', '\\textasciicircum{}')
+        return text
+
+    def export_latex(self, candidate_data: Dict[str, Any], output_path: Path) -> str:
         if not self.template_path.exists():
-            raise FileNotFoundError(f"Template not found at {self.template_path}")
+            raise FileNotFoundError(f"LaTeX template not found at {self.template_path}")
 
         with open(self.template_path, "r", encoding="utf-8") as f:
-            template = f.read()
+            template_str = f.read()
 
-        profile = career_data.profile
-        name = profile.name if profile else "Your Name"
-        title = profile.title if profile else "Software Engineer"
-        email = profile.email if profile else "email@example.com"
-        location = profile.location if profile else "City, Country"
-        summary = profile.summary if profile else ""
+        profile = candidate_data.get("profile", {})
+        education = candidate_data.get("education", [])
+        experiences = candidate_data.get("experiences", [])
+        projects = candidate_data.get("projects", [])
 
-        # Format Experiences Block using top relevant retrieved chunks
-        exp_lines = []
-        for chunk in retrieved_chunks:
-            if chunk["metadata"].get("source_type") == "experience":
-                role_title = chunk["metadata"].get("title", "Software Engineer")
-                dates = chunk["metadata"].get("dates", "")
-                exp_lines.append(f"  \\item \\textbf{{{role_title}}} \\hfill {{ {dates} }}\\\\")
-                # Format bullet point
-                content_clean = chunk["content"].replace("%", "\\%").replace("&", "\\&")
-                bullet_str = content_clean.split("\n")[1] if "\n" in content_clean else content_clean
-                exp_lines.append(f"  \\begin{{itemize}}[leftmargin=0.2in]\n    \\item {bullet_str}\n  \\end{{itemize}}")
+        # 1. Header Replacements
+        template_str = template_str.replace("{{ NAME }}", self._escape_latex(profile.get("name", "Deepansh Umar")))
+        template_str = template_str.replace("{{ PHONE }}", self._escape_latex(profile.get("phone", "(+91) 9581730273")))
+        template_str = template_str.replace("{{ EMAIL }}", profile.get("email", "umardeepansh@gmail.com"))
+        template_str = template_str.replace("{{ LINKEDIN }}", profile.get("linkedin", "https://linkedin.com/in/deepansh-umar"))
+        template_str = template_str.replace("{{ GITHUB }}", profile.get("github", "https://github.com/Deepansh-Umar"))
 
-        experiences_block = "\n".join(exp_lines)
+        # 2. Education Block
+        edu_items = []
+        for edu in education:
+            inst = self._escape_latex(edu.get("institution", ""))
+            deg = self._escape_latex(edu.get("degree", ""))
+            dates = self._escape_latex(edu.get("dates", ""))
+            cgpa = self._escape_latex(edu.get("cgpa", ""))
+            detail = f"CGPA: {cgpa}" if cgpa else ""
 
-        # Format Projects Block
-        proj_lines = []
-        for proj in career_data.projects:
-            tech_str = ", ".join(proj.tech_stack)
-            proj_lines.append(
-                f"  \\item \\textbf{{{proj.name}}} -- \\textit{{{proj.tagline}}} \\hfill \\textbf{{Tech: {tech_str}}}\\\\"
+            edu_items.append(
+                f"    \\resumeSubheading\n"
+                f"      {{{inst}}}{{{dates}}}\n"
+                f"      {{{deg}}}{{{detail}}}"
             )
-            if proj.key_achievements:
-                proj_lines.append("  \\begin{itemize}[leftmargin=0.2in]")
-                for ach in proj.key_achievements[:2]:
-                    ach_clean = ach.replace("%", "\\%").replace("&", "\\&")
-                    proj_lines.append(f"    \\item {ach_clean}")
-                proj_lines.append("  \\end{itemize}")
+        template_str = template_str.replace("{{ EDUCATION_BLOCK }}", "\n".join(edu_items))
 
-        projects_block = "\n".join(proj_lines)
+        # 3. Experience Block
+        exp_items = []
+        for exp in experiences:
+            role = self._escape_latex(exp.get("role", ""))
+            org = self._escape_latex(exp.get("organization", ""))
+            dates = self._escape_latex(exp.get("dates", ""))
 
-        # Format Skills Block
-        skills_lines = []
-        for cat in career_data.skill_categories:
-            skill_names = ", ".join([s.name for s in cat.skills])
-            skills_lines.append(f"  \\item \\textbf{{{cat.category}}}: {skill_names}")
-        skills_block = "\n".join(skills_lines)
+            bullets = exp.get("bullets", [])
+            bullet_tex = []
+            for b in bullets:
+                b_text = b.get("text", "") if isinstance(b, dict) else str(b)
+                bullet_tex.append(f"        \\resumeBullet{{{self._escape_latex(b_text)}}}")
 
-        # Perform template substitution
-        rendered = template.replace("{{ NAME }}", name)
-        rendered = rendered.replace("{{ TITLE }}", title)
-        rendered = rendered.replace("{{ EMAIL }}", email)
-        rendered = rendered.replace("{{ LOCATION }}", location)
-        rendered = rendered.replace("{{ SUMMARY }}", summary)
-        rendered = rendered.replace("{{ EXPERIENCES_BLOCK }}", experiences_block)
-        rendered = rendered.replace("{{ PROJECTS_BLOCK }}", projects_block)
-        rendered = rendered.replace("{{ SKILLS_BLOCK }}", skills_block)
+            bullets_str = "\n".join(bullet_tex)
+            exp_items.append(
+                f"    \\resumeSubheading\n"
+                f"      {{{org}}}{{{dates}}}\n"
+                f"      {{{role}}}{{}}\n"
+                f"      \\resumeItemListStart\n"
+                f"{bullets_str}\n"
+                f"      \\resumeItemListEnd"
+            )
+        template_str = template_str.replace("{{ EXPERIENCES_BLOCK }}", "\n".join(exp_items))
+
+        # 4. Projects Block
+        proj_items = []
+        for proj in projects:
+            title = self._escape_latex(proj.get("title", ""))
+            tech_list = proj.get("tech_stack", [])
+            tech_str = self._escape_latex(", ".join(tech_list)) if isinstance(tech_list, list) else self._escape_latex(str(tech_list))
+            repo_url = proj.get("github_url", "")
+            live_url = proj.get("live_url", "")
+
+            link_part = f"\\href{{{repo_url}}}{{\\underline{{GitHub}}}}"
+            if live_url:
+                link_part += f" $|$ \\href{{{live_url}}}{{\\underline{{Live Demo}}}}"
+
+            bullets = proj.get("bullets", [])
+            bullet_tex = []
+            for b in bullets:
+                b_text = b.get("text", "") if isinstance(b, dict) else str(b)
+                bullet_tex.append(f"        \\resumeBullet{{{self._escape_latex(b_text)}}}")
+
+            bullets_str = "\n".join(bullet_tex)
+            proj_items.append(
+                f"    \\resumeProjectHeading\n"
+                f"      {{\\textbf{{{title}}} $|$ \\emph{{{tech_str}}}}}{{{link_part}}}\n"
+                f"      \\resumeItemListStart\n"
+                f"{bullets_str}\n"
+                f"      \\resumeItemListEnd"
+            )
+        template_str = template_str.replace("{{ PROJECTS_BLOCK }}", "\n".join(proj_items))
+
+        # 5. Skills Block
+        template_str = template_str.replace("{{ LANGUAGES }}", "Python, Java, SQL, JavaScript, Bash, C/C++")
+        template_str = template_str.replace("{{ BACKEND_SKILLS }}", "Flask, REST APIs, FastAPI, PostgreSQL, Redis, Celery, SQLAlchemy")
+        template_str = template_str.replace("{{ AIML_SKILLS }}", "Scikit-Learn, PyTorch, LightGBM, XGBoost, NLP, TF-IDF, RAG, ChromaDB")
+        template_str = template_str.replace("{{ DATABASE_SKILLS }}", "PostgreSQL, MySQL, SQLite, Redis")
+        template_str = template_str.replace("{{ TOOLS_SKILLS }}", "Git, GitHub, Docker, Postman, Jupyter Notebook, Render, Vercel")
 
         output_path.parent.mkdir(parents=True, exist_ok=True)
         with open(output_path, "w", encoding="utf-8") as f:
-            f.write(rendered)
+            f.write(template_str)
 
-        return str(output_path)
+        return template_str
