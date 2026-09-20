@@ -1,0 +1,74 @@
+candidate: Deepansh Umar
+total_repositories_analyzed: 47
+programming_languages:
+- Bash
+- C
+- C/C++
+- CSS
+- HTML
+- HTML/CSS
+- Java
+- JavaScript
+- Python
+- React
+- SQL
+- TypeScript
+ai_ml_deep_learning:
+- LightGBM
+- OpenCV
+- PyTorch
+- SciPy
+- Scikit-Learn
+- XGBoost
+nlp_rag_llms:
+- ChromaDB
+- Claude API
+- Gemini API
+- Google Gemini API
+- LangGraph
+- Ollama
+- RAG
+- SentenceTransformers
+backend_frameworks:
+- BeautifulSoup / Web Scraping
+- Celery
+- Chrome Extensions
+- Express.js
+- FastAPI
+- Flask
+- PostgreSQL
+- REST APIs
+- Redis
+- SQLAlchemy
+frontend_frameworks:
+- Axios
+- Bootstrap
+- CSS3
+- HTML5
+- JavaScript (ES6+)
+- React
+- Vue.js
+databases_storage:
+- ChromaDB
+- MySQL
+- PostgreSQL
+- Redis
+- SQLite
+tools_infrastructure:
+- Ceipal
+- Docker
+- Git
+- GitHub
+- HuggingFace Transformers
+- Jupyter Notebook
+- Jupyter Notebooks
+- LinkedIn Recruiter
+- Matplotlib
+- NumPy
+- Pandas
+- Postman
+- Render
+- Seaborn
+- Streamlit
+- Vercel
+- Vue

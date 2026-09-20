@@ -83,51 +83,39 @@ class FullContextSelectionEngine:
     def _load_all_candidate_projects(self) -> List[Dict[str, Any]]:
         all_projects = []
 
-        # 1. Load hand-curated master evidence first (Highest quality)
-        yaml_path = self.data_dir / "career_evidence.yaml"
-        if yaml_path.exists():
-            with open(yaml_path, "r", encoding="utf-8") as f:
-                data = yaml.safe_load(f) or {}
-                for p in data.get("projects", []):
-                    if not self._is_duplicate_project(p, all_projects):
-                        all_projects.append(p)
+        # 1. Load from Master Project Knowledge Store if available
+        master_store_path = self.data_dir / "master_project_store.yaml"
+        if master_store_path.exists():
+            with open(master_store_path, "r", encoding="utf-8") as f:
+                raw_master = yaml.safe_load(f) or []
+                for p in raw_master:
+                    bullets = []
+                    for b in p.get("resume_bullets", []):
+                        bullets.append({"text": b} if isinstance(b, str) else b)
 
-        # 2. Load scraped GitHub repos (Deduplicate against master evidence)
-        gh_path = self.data_dir / "github_deep_extract.yaml"
-        if gh_path.exists():
-            with open(gh_path, "r", encoding="utf-8") as f:
-                gh_projects = yaml.safe_load(f) or []
-                for gh in gh_projects:
-                    raw_title = gh.get("title", "") or gh.get("repo_name", "")
-
-                    candidate_obj = {
-                        "id": gh.get("id"),
-                        "title": raw_title,
-                        "github_url": gh.get("github_url", ""),
-                        "live_url": gh.get("live_url", ""),
-                        "tech_stack": [gh.get("primary_language", "")] if gh.get("primary_language") != "N/A" else [],
-                        "bullets": []
+                    proj_obj = {
+                        "id": p.get("id"),
+                        "title": p.get("title"),
+                        "github_url": p.get("github_url"),
+                        "live_url": p.get("live_url", ""),
+                        "tech_stack": p.get("tech_stack", []),
+                        "bullets": bullets,
+                        "domain_category": p.get("domain_category", ""),
+                        "complexity_rating": p.get("complexity_rating", "")
                     }
 
-                    # Skip duplicate titles or URLs
-                    if self._is_duplicate_project(candidate_obj, all_projects):
-                        continue
+                    if not self._is_duplicate_project(proj_obj, all_projects):
+                        all_projects.append(proj_obj)
 
-                    # Skip empty repos
-                    if not gh.get("has_readme") and (not gh.get("description") or gh.get("description") == "No description provided."):
-                        continue
-
-                    bullets = []
-                    desc = gh.get("description", "")
-                    if desc and desc != "No description provided.":
-                        bullets.append({"text": desc})
-                    elif gh.get("readme_summary") and len(gh["readme_summary"]) > 40:
-                        clean_sum = re.sub(r'#+\s*', '', gh["readme_summary"]).strip()
-                        bullets.append({"text": clean_sum[:250]})
-
-                    if bullets:
-                        candidate_obj["bullets"] = bullets
-                        all_projects.append(candidate_obj)
+        # 2. Fallback to hand-curated career evidence if master store not loaded
+        if not all_projects:
+            yaml_path = self.data_dir / "career_evidence.yaml"
+            if yaml_path.exists():
+                with open(yaml_path, "r", encoding="utf-8") as f:
+                    data = yaml.safe_load(f) or {}
+                    for p in data.get("projects", []):
+                        if not self._is_duplicate_project(p, all_projects):
+                            all_projects.append(p)
 
         return all_projects
 

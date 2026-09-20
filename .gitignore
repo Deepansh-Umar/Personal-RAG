@@ -3,9 +3,10 @@
 env/
 venv/
 
-# Local Experimental Scripts (Will NOT be pushed to GitHub)
+# Local Experimental Scripts & Cloned Repositories
 local_experiments/
 scratch/
+cloned_repos/
 
 # Vector Databases & Databases
 chroma_db/
