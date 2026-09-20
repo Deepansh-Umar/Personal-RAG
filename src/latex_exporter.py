@@ -6,7 +6,7 @@ from typing import Dict, Any, List, Optional
 class LaTeXExporter:
     """
     Renders high-density, ATS-optimized LaTeX (.tex) resumes matching Jake's Resume standard template.
-    Ensures 100% valid LaTeX syntax by properly escaping special characters.
+    Enforces single primary education and em-dash (---) contact separators.
     """
 
     def __init__(self, template_path: Optional[Path] = None):
@@ -45,13 +45,14 @@ class LaTeXExporter:
         template_str = template_str.replace("{{ LINKEDIN }}", profile.get("linkedin", "https://linkedin.com/in/deepansh-umar"))
         template_str = template_str.replace("{{ GITHUB }}", profile.get("github", "https://github.com/Deepansh-Umar"))
 
-        # 2. Education Block
+        # 2. Education Block (STRICT SINGLE PRIMARY EDUCATION RULE)
+        primary_edu = [e for e in education if e.get("is_primary")] or (education[:1] if education else [])
         edu_items = []
-        for edu in education:
-            inst = self._escape_latex(edu.get("institution", ""))
-            deg = self._escape_latex(edu.get("degree", ""))
-            dates = self._escape_latex(edu.get("dates", ""))
-            cgpa = self._escape_latex(edu.get("cgpa", ""))
+        for edu in primary_edu:
+            inst = self._escape_latex(edu.get("institution", "Indian Institute of Technology Madras"))
+            deg = self._escape_latex(edu.get("degree", "Bachelor of Science in Data Science and Applications"))
+            dates = self._escape_latex(edu.get("dates", "2024 – Present"))
+            cgpa = self._escape_latex(edu.get("cgpa", "9.23 / 10.0"))
             detail = f"CGPA: {cgpa}" if cgpa else ""
 
             edu_items.append(
@@ -61,7 +62,7 @@ class LaTeXExporter:
             )
         template_str = template_str.replace("{{ EDUCATION_BLOCK }}", "\n".join(edu_items))
 
-        # 3. Experience Block
+        # 3. Experience Block (Including Conglomerate IT & e-DAM Mentor)
         exp_items = []
         for exp in experiences:
             role = self._escape_latex(exp.get("role", ""))
@@ -115,11 +116,11 @@ class LaTeXExporter:
         template_str = template_str.replace("{{ PROJECTS_BLOCK }}", "\n".join(proj_items))
 
         # 5. Skills Block
-        template_str = template_str.replace("{{ LANGUAGES }}", "Python, Java, SQL, JavaScript, Bash, C/C++")
-        template_str = template_str.replace("{{ BACKEND_SKILLS }}", "Flask, REST APIs, FastAPI, PostgreSQL, Redis, Celery, SQLAlchemy")
-        template_str = template_str.replace("{{ AIML_SKILLS }}", "Scikit-Learn, PyTorch, LightGBM, XGBoost, NLP, TF-IDF, RAG, ChromaDB")
+        template_str = template_str.replace("{{ LANGUAGES }}", "Python, Java, SQL, JavaScript, HTML/CSS, React, Bash, C/C++")
+        template_str = template_str.replace("{{ AIML_SKILLS }}", "Claude API, Gemini API, PyTorch, Scikit-Learn, LightGBM, XGBoost, NLP, TF-IDF, RAG, ChromaDB")
+        template_str = template_str.replace("{{ BACKEND_SKILLS }}", "Flask, REST APIs, FastAPI, PostgreSQL, Redis, Celery, Chrome Extensions")
         template_str = template_str.replace("{{ DATABASE_SKILLS }}", "PostgreSQL, MySQL, SQLite, Redis")
-        template_str = template_str.replace("{{ TOOLS_SKILLS }}", "Git, GitHub, Docker, Postman, Jupyter Notebook, Render, Vercel")
+        template_str = template_str.replace("{{ TOOLS_SKILLS }}", "Git, GitHub, Docker, LinkedIn Recruiter, Ceipal, Postman, Render, Vercel")
 
         output_path.parent.mkdir(parents=True, exist_ok=True)
         with open(output_path, "w", encoding="utf-8") as f:

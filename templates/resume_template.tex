@@ -18,7 +18,7 @@
 \renewcommand{\headrulewidth}{0pt}
 \renewcommand{\footrulewidth}{0pt}
 
-% Adjust margins
+% Adjust margins for ATS single-page density
 \addtolength{\oddsidemargin}{-0.5in}
 \addtolength{\evensidemargin}{-0.5in}
 \addtolength{\textwidth}{1in}
@@ -78,16 +78,16 @@
 
 \begin{document}
 
-%----------HEADING-----------------
+%----------HEADING (Using Em-Dash '---' Separator)-----------------
 \begin{center}
     \textbf{\Huge \scshape {{ NAME }}} \\ \vspace{1pt}
-    \small {{ PHONE }} $|$ \href{mailto:{{ EMAIL }}}{\underline{{{ EMAIL }}}} $|$ 
-    \href{{{ LINKEDIN }}}{\underline{LinkedIn}} $|$
+    \small {{ PHONE }} --- \href{mailto:{{ EMAIL }}}{\underline{{{ EMAIL }}}} --- 
+    \href{{{ LINKEDIN }}}{\underline{LinkedIn}} --- 
     \href{{{ GITHUB }}}{\underline{GitHub}}
 \end{center}
 
 
-%-----------EDUCATION-----------------
+%-----------EDUCATION (Single Primary Institution)-----------------
 \section{Education}
   \resumeSubHeadingListStart
 {{ EDUCATION_BLOCK }}
@@ -113,8 +113,8 @@
  \begin{itemize}[leftmargin=0.15in, label={}]
     \small{\item{
      \textbf{Programming Languages}{: {{ LANGUAGES }}} \\
+     \textbf{AI, ML \& LLMs}{: {{ AIML_SKILLS }}} \\
      \textbf{Backend \& APIs}{: {{ BACKEND_SKILLS }}} \\
-     \textbf{AI, ML \& NLP}{: {{ AIML_SKILLS }}} \\
      \textbf{Databases \& Storage}{: {{ DATABASE_SKILLS }}} \\
      \textbf{Tools \& Infrastructure}{: {{ TOOLS_SKILLS }}}
     }}
