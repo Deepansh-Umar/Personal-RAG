@@ -14,7 +14,8 @@ class FullContextSelectionEngine:
     Autonomous Full-Context Selection Engine.
     Evaluates candidate's complete evidence store (scraped GitHub repos + YAML evidence)
     against target Job Descriptions and all recruiter market domains automatically.
-    Zero manual project picking required from the user.
+    Filters out web utilities & empty repositories for AI/DL research roles.
+    Strictly deduplicates projects by repository name and token similarity.
     """
 
     def __init__(self, data_dir: Optional[Path] = None, api_key: Optional[str] = None):
@@ -29,49 +30,110 @@ class FullContextSelectionEngine:
             except ImportError:
                 pass
 
+    def _is_duplicate_project(self, new_proj: Any, existing_projects: List[Any]) -> bool:
+        """
+        Strict deduplication comparing GitHub URLs, repo names, and core topic signatures.
+        """
+        if isinstance(new_proj, dict):
+            new_title = new_proj.get("title", "")
+            new_url = (new_proj.get("github_url", "") or "").lower().rstrip('/')
+        else:
+            new_title = str(new_proj)
+            new_url = ""
+
+        new_lower = new_title.lower()
+        topic_keywords = ["sentiment", "rag", "parkease", "shortener", "mlp", "housing", "diabetes", "hospital", "tesseract", "autohmpi", "leetcode"]
+
+        new_tokens = set(re.findall(r'[a-zA-Z0-9]+', new_lower)) - {
+            "project", "repo", "system", "assistant", "pipeline", "service", "app", "v2", "classification", "analysis", "framework", "tool"
+        }
+
+        for ex in existing_projects:
+            if isinstance(ex, dict):
+                ex_title = ex.get("title", "")
+                ex_url = (ex.get("github_url", "") or "").lower().rstrip('/')
+            else:
+                ex_title = str(ex)
+                ex_url = ""
+
+            # 1. Direct GitHub URL match
+            if new_url and ex_url and new_url == ex_url:
+                return True
+
+            ex_lower = ex_title.lower()
+
+            # 2. Topic signature overlap (e.g. both refer to sentiment analysis or RAG)
+            for kw in topic_keywords:
+                if kw in new_lower and kw in ex_lower:
+                    return True
+
+            # 3. Token similarity check
+            ex_tokens = set(re.findall(r'[a-zA-Z0-9]+', ex_lower)) - {
+                "project", "repo", "system", "assistant", "pipeline", "service", "app", "v2", "classification", "analysis", "framework", "tool"
+            }
+            if not ex_tokens or not new_tokens:
+                continue
+
+            overlap = new_tokens.intersection(ex_tokens)
+            if overlap and (len(overlap) / min(len(new_tokens), len(ex_tokens)) >= 0.5):
+                return True
+
+        return False
+
     def _load_all_candidate_projects(self) -> List[Dict[str, Any]]:
         all_projects = []
 
-        # 1. Load hand-curated YAML evidence
+        # 1. Load hand-curated master evidence first (Highest quality)
         yaml_path = self.data_dir / "career_evidence.yaml"
         if yaml_path.exists():
             with open(yaml_path, "r", encoding="utf-8") as f:
                 data = yaml.safe_load(f) or {}
-                all_projects.extend(data.get("projects", []))
+                for p in data.get("projects", []):
+                    if not self._is_duplicate_project(p, all_projects):
+                        all_projects.append(p)
 
-        # 2. Load scraped GitHub repositories
+        # 2. Load scraped GitHub repos (Deduplicate against master evidence)
         gh_path = self.data_dir / "github_deep_extract.yaml"
         if gh_path.exists():
             with open(gh_path, "r", encoding="utf-8") as f:
                 gh_projects = yaml.safe_load(f) or []
                 for gh in gh_projects:
-                    # Avoid duplicates if already in YAML
-                    if not any(p.get("id") == gh.get("id") for p in all_projects):
-                        bullets = []
-                        if gh.get("readme_summary") and len(gh["readme_summary"]) > 40:
-                            bullets.append({"text": gh["readme_summary"][:300]})
-                        elif gh.get("description"):
-                            bullets.append({"text": gh["description"]})
+                    raw_title = gh.get("title", "") or gh.get("repo_name", "")
 
-                        all_projects.append({
-                            "id": gh.get("id"),
-                            "title": gh.get("title"),
-                            "github_url": gh.get("github_url"),
-                            "live_url": gh.get("live_url", ""),
-                            "tech_stack": [gh.get("primary_language", "")] if gh.get("primary_language") != "N/A" else [],
-                            "bullets": bullets
-                        })
+                    candidate_obj = {
+                        "id": gh.get("id"),
+                        "title": raw_title,
+                        "github_url": gh.get("github_url", ""),
+                        "live_url": gh.get("live_url", ""),
+                        "tech_stack": [gh.get("primary_language", "")] if gh.get("primary_language") != "N/A" else [],
+                        "bullets": []
+                    }
+
+                    # Skip duplicate titles or URLs
+                    if self._is_duplicate_project(candidate_obj, all_projects):
+                        continue
+
+                    # Skip empty repos
+                    if not gh.get("has_readme") and (not gh.get("description") or gh.get("description") == "No description provided."):
+                        continue
+
+                    bullets = []
+                    desc = gh.get("description", "")
+                    if desc and desc != "No description provided.":
+                        bullets.append({"text": desc})
+                    elif gh.get("readme_summary") and len(gh["readme_summary"]) > 40:
+                        clean_sum = re.sub(r'#+\s*', '', gh["readme_summary"]).strip()
+                        bullets.append({"text": clean_sum[:250]})
+
+                    if bullets:
+                        candidate_obj["bullets"] = bullets
+                        all_projects.append(candidate_obj)
 
         return all_projects
 
     def select_best_context_autonomously(self, parsed_jd: ParsedJobDescription) -> Dict[str, Any]:
-        """
-        AUTONOMOUS SELECTION: Evaluates all candidate projects against the JD & Recruiter Matrix.
-        Returns top matching projects and bullets automatically.
-        """
         candidate_projects = self._load_all_candidate_projects()
 
-        # Default profile & education facts
         yaml_path = self.data_dir / "career_evidence.yaml"
         profile, education, experiences = {}, [], []
         if yaml_path.exists():
@@ -81,16 +143,32 @@ class FullContextSelectionEngine:
                 education = d.get("education", [])
                 experiences = d.get("experiences", [])
 
+        # Detect AI/DL/Research role
+        title_lower = parsed_jd.title.lower()
+        skills_lower = [s.lower() for s in parsed_jd.required_skills]
+        is_dl_research_role = any(kw in title_lower or any(kw in s for s in skills_lower) for kw in ["deep learning", "research", "perception", "computer vision", "nlp", "machine learning", "ai"])
+
+        # Filter out web utilities & empty repos for DL research roles
+        if is_dl_research_role:
+            filtered_projects = [
+                p for p in candidate_projects
+                if not any(web_kw in p.get("title", "").lower() or web_kw in p.get("id", "").lower()
+                           for web_kw in ["url_shortener", "url shortener", "gcc_bose", "file_organizer", "tds", "resources"])
+            ]
+            if len(filtered_projects) >= 3:
+                candidate_projects = filtered_projects
+
         if not self.client or not candidate_projects:
-            # Deterministic autonomous selection fallback
             jd_skills_lower = set(s.lower() for s in parsed_jd.required_skills)
             scored = []
             for p in candidate_projects:
                 tech_set = set(t.lower() for t in p.get("tech_stack", []))
-                title_lower = p.get("title", "").lower()
+                p_title_lower = p.get("title", "").lower()
                 overlap = len(jd_skills_lower.intersection(tech_set))
-                if any(s in title_lower for s in jd_skills_lower):
-                    overlap += 2
+
+                if is_dl_research_role and any(ml_kw in p_title_lower or any(ml_kw in t for t in tech_set) for ml_kw in ["sentiment", "ml", "learning", "rag", "perception", "housing", "etl"]):
+                    overlap += 5
+
                 scored.append((overlap, p))
 
             scored.sort(key=lambda x: x[0], reverse=True)
@@ -101,34 +179,34 @@ class FullContextSelectionEngine:
                 "education": education,
                 "experiences": experiences,
                 "projects": top_selected,
-                "matched_recruiter_domains": ["Full-Stack & Web", "AI/ML", "Backend"]
+                "matched_recruiter_domains": ["AI/ML", "Computer Vision", "Data Science"]
             }
 
-        # Autonomous Full-Context Prompt
         prompt = f"""
 You are an Autonomous Executive Recruiter & AI Resume Architect.
-Your task is to AUTONOMOUSLY analyze the Candidate's entire project repository (scraped GitHub repos + YAML evidence) and select the TOP 3 to 4 PROJECTS that best match the target Job Description and Recruiter Market Standards.
+Target Role: {parsed_jd.title} ({'DEEP LEARNING / AI RESEARCH ROLE' if is_dl_research_role else 'ENGINEERING ROLE'})
+Company: {parsed_jd.company}
+
+CRITICAL MANDATE FOR DL / AI RESEARCH ROLE:
+DO NOT SELECT DUPLICATE PROJECTS OR BASIC WEB UTILITIES.
+SELECT ONLY UNIQUE HIGH-IMPACT AI/ML, NLP, DATA PIPELINE, OR COMPLEX SYSTEM PROJECTS FROM THE LIST BELOW.
 
 ================ TARGET JOB DESCRIPTION ================
 Role Title: {parsed_jd.title}
 Required Skills: {', '.join(parsed_jd.required_skills)}
 Core Responsibilities: {', '.join(parsed_jd.core_responsibilities[:4])}
 
-================ RECRUITER MARKET DOMAINS MATRIX ================
-{json.dumps(RECRUITER_DOMAINS, indent=2)}
-
 ================ CANDIDATE REPOSITORY INVENTORY ================
 {yaml.dump(candidate_projects, default_flow_style=False)}
 
 ================ AUTONOMOUS INSTRUCTION ================
-1. Autonomously select the 3-4 best candidate projects that align with the role requirements.
-2. Select the top 2-3 bullet points per project.
-3. Identify which Recruiter Market Domains the candidate matches best.
+1. Select 3-4 UNIQUE candidate projects matching the role requirements.
+2. Ensure ZERO duplicated project titles or duplicate repositories.
 
 Return JSON formatted as:
 {{
-  "selected_project_ids": ["proj_id_1", "proj_id_2"],
-  "matched_domains": ["Cloud & Infrastructure", "Full-Stack & Web Engineering"],
+  "selected_project_ids": ["proj_phrase_sentiment_ml", "proj_personal_rag", "proj_parkease"],
+  "matched_domains": ["AI, Machine Learning & LLMs", "Data Engineering & Big Data"],
   "selection_reasoning": "Detailed explanation of autonomous selection"
 }}
 
