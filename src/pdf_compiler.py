@@ -75,7 +75,7 @@ class PDFCompilerEngine:
             if live_url:
                 links += f' | <a href="{live_url}">Live Demo</a>'
 
-            bullets = proj.get("bullets", [])
+            bullets = proj.get("bullets", [])[:2]
             b_html = "\n".join(f"<li>{b.get('text', '') if isinstance(b, dict) else str(b)}</li>" for b in bullets)
 
             proj_items.append(f"""
@@ -96,39 +96,39 @@ class PDFCompilerEngine:
 <style>
     @page {{
         size: letter;
-        margin: 0.4in;
+        margin: 0.35in;
     }}
     body {{
         font-family: 'Times New Roman', Times, serif, Arial, sans-serif;
-        font-size: 10.5pt;
-        line-height: 1.35;
+        font-size: 10pt;
+        line-height: 1.3;
         color: #111;
         margin: 0;
         padding: 0;
     }}
     h1 {{
         text-align: center;
-        font-size: 22pt;
+        font-size: 20pt;
         text-transform: uppercase;
-        margin: 0 0 4px 0;
+        margin: 0 0 2px 0;
         letter-spacing: 1px;
     }}
     .contact {{
         text-align: center;
-        font-size: 9.5pt;
-        margin-bottom: 12px;
+        font-size: 9pt;
+        margin-bottom: 8px;
     }}
     .contact a {{
         color: #111;
         text-decoration: underline;
     }}
     .section-title {{
-        font-size: 12pt;
+        font-size: 11pt;
         font-weight: bold;
         text-transform: uppercase;
         border-bottom: 1px solid #111;
-        margin-top: 10px;
-        margin-bottom: 6px;
+        margin-top: 8px;
+        margin-bottom: 4px;
         letter-spacing: 0.5px;
     }}
     .row {{
@@ -141,10 +141,10 @@ class PDFCompilerEngine:
         font-style: italic;
     }}
     .item {{
-        margin-bottom: 6px;
+        margin-bottom: 4px;
     }}
     ul {{
-        margin: 2px 0 6px 18px;
+        margin: 2px 0 4px 16px;
         padding: 0;
     }}
     li {{

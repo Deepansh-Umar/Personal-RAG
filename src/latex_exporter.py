@@ -99,7 +99,7 @@ class LaTeXExporter:
             if live_url:
                 link_part += f" $|$ \\href{{{live_url}}}{{\\underline{{Live Demo}}}}"
 
-            bullets = proj.get("bullets", [])
+            bullets = proj.get("bullets", [])[:2]
             bullet_tex = []
             for b in bullets:
                 b_text = b.get("text", "") if isinstance(b, dict) else str(b)
