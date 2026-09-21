@@ -1,12 +1,53 @@
 {
-  "AI & Machine Learning": [
+  "AI & Machine Learning (ML/DL)": [
+    {
+      "id": "proj_diabetes_prediction",
+      "title": "Diabetes Prediction",
+      "repo_name": "Diabetes-Prediction",
+      "github_url": "https://github.com/Deepansh-Umar/Diabetes-Prediction",
+      "live_url": "",
+      "domain_category": "AI & Machine Learning (ML/DL)",
+      "complexity_rating": "High Impact Production / Research Project",
+      "primary_language": "Python",
+      "loc_estimate": 63,
+      "tech_stack": [
+        "Matplotlib",
+        "NumPy",
+        "Pandas",
+        "Python",
+        "Scikit-Learn",
+        "Seaborn"
+      ],
+      "purpose_summary": "No description provided.",
+      "resume_bullets": [
+        "Diabetes Prediction\n\nThis project predicts the likelihood of diabetes using a public dataset and scikit-learn. \n\n  Dataset\n- [PIMA Indian Diabetes Dataset](https://www.kaggle.com/datasets/uciml/pima-indians-diabetes-data"
+      ]
+    },
+    {
+      "id": "proj_heavy_machine_price_prediction",
+      "title": "Heavy Machine Price Prediction",
+      "repo_name": "Heavy-Machine-Price-Prediction",
+      "github_url": "https://github.com/Deepansh-Umar/Heavy-Machine-Price-Prediction",
+      "live_url": "",
+      "domain_category": "AI & Machine Learning (ML/DL)",
+      "complexity_rating": "Targeted Utility / Academic Project",
+      "primary_language": "Jupyter Notebook",
+      "loc_estimate": 1,
+      "tech_stack": [
+        "Jupyter Notebook"
+      ],
+      "purpose_summary": "No description provided.",
+      "resume_bullets": [
+        "Heavy Machine Price Prediction\n\nThis repository contains the dataset and machine learning solution for predicting the selling price of heavy industrial machinery and equipment lifecycles.\n\n Project Overview\n\nThe dataset "
+      ]
+    },
     {
       "id": "proj_mcq_solver",
       "title": "Mcq Solver",
       "repo_name": "MCQ-Solver",
       "github_url": "https://github.com/Deepansh-Umar/MCQ-Solver",
       "live_url": "",
-      "domain_category": "AI & Machine Learning",
+      "domain_category": "AI & Machine Learning (ML/DL)",
       "complexity_rating": "High Impact Production / Research Project",
       "primary_language": "Python",
       "loc_estimate": 458,
@@ -24,12 +65,66 @@
       ]
     },
     {
+      "id": "proj_california_housing_price_prediction",
+      "title": "California Housing Price Prediction",
+      "repo_name": "california_housing_price_prediction",
+      "github_url": "https://github.com/Deepansh-Umar/california_housing_price_prediction",
+      "live_url": "",
+      "domain_category": "AI & Machine Learning (ML/DL)",
+      "complexity_rating": "Targeted Utility / Academic Project",
+      "primary_language": "Jupyter Notebook",
+      "loc_estimate": 1,
+      "tech_stack": [
+        "Jupyter Notebook"
+      ],
+      "purpose_summary": "No description provided.",
+      "resume_bullets": [
+        "\ud83c\udfe1 California Housing Price Prediction\n\nThis project predicts **median house values** in California districts using **Machine Learning**.  \nThe dataset contains housing, population, and income features, along with categor"
+      ]
+    },
+    {
+      "id": "proj_diabetes_prediction",
+      "title": "Diabetes Prediction",
+      "repo_name": "diabetes-prediction",
+      "github_url": "https://github.com/Deepansh-Umar/Diabetes-Prediction",
+      "live_url": "",
+      "domain_category": "AI & Machine Learning (ML/DL)",
+      "complexity_rating": "Targeted Utility / Academic Project",
+      "primary_language": "Python",
+      "loc_estimate": 0,
+      "tech_stack": [
+        "Python"
+      ],
+      "purpose_summary": "No description provided.",
+      "resume_bullets": [
+        "Engineered custom application utilizing Python."
+      ]
+    },
+    {
+      "id": "proj_heavy_machine_price_prediction",
+      "title": "Heavy Machine Price Prediction",
+      "repo_name": "heavy-machine-price-prediction",
+      "github_url": "https://github.com/Deepansh-Umar/Heavy-Machine-Price-Prediction",
+      "live_url": "",
+      "domain_category": "AI & Machine Learning (ML/DL)",
+      "complexity_rating": "Targeted Utility / Academic Project",
+      "primary_language": "Jupyter Notebook",
+      "loc_estimate": 0,
+      "tech_stack": [
+        "Jupyter Notebook"
+      ],
+      "purpose_summary": "No description provided.",
+      "resume_bullets": [
+        "Engineered custom application utilizing Jupyter Notebook."
+      ]
+    },
+    {
       "id": "proj_mcq_solver",
       "title": "Mcq Solver",
       "repo_name": "mcq-solver",
       "github_url": "https://github.com/Deepansh-Umar/MCQ-Solver",
       "live_url": "",
-      "domain_category": "AI & Machine Learning",
+      "domain_category": "AI & Machine Learning (ML/DL)",
       "complexity_rating": "Targeted Utility / Academic Project",
       "primary_language": "Python",
       "loc_estimate": 0,
@@ -47,7 +142,7 @@
       "repo_name": "text_sentiment_classification",
       "github_url": "https://github.com/Deepansh-Umar/text_sentiment_classification",
       "live_url": "",
-      "domain_category": "AI & Machine Learning",
+      "domain_category": "AI & Machine Learning (ML/DL)",
       "complexity_rating": "Core Application Project",
       "primary_language": "Jupyter Notebook",
       "loc_estimate": 1457,
@@ -57,6 +152,158 @@
       "purpose_summary": "No description provided.",
       "resume_bullets": [
         "Phrase Sentiment Analysis and Machine Learning Pipeline\n\n Project Overview\nThis project delivers an end-to-end natural language processing (NLP) and machine \nlearning classification engine built to predict sentiment prof"
+      ]
+    }
+  ],
+  "Data Science & Analytics (DS/DA)": [
+    {
+      "id": "proj_mlp",
+      "title": "Machine Learning Practice (MLP) Repository",
+      "repo_name": "MLP",
+      "github_url": "https://github.com/Deepansh-Umar/MLP",
+      "live_url": "",
+      "domain_category": "Data Science & Analytics (DS/DA)",
+      "complexity_rating": "High Impact Production / Research Project",
+      "primary_language": "Jupyter Notebook",
+      "loc_estimate": 6622,
+      "tech_stack": [
+        "Jupyter Notebook",
+        "NumPy",
+        "Pandas",
+        "Python",
+        "Scikit-Learn"
+      ],
+      "purpose_summary": "This is a all in one repo for my MLP theory course at IITM BS",
+      "resume_bullets": [
+        "Developed machine learning workflows for IIT Madras BS Machine Learning Practice course, covering supervised models, decision trees, and ensemble methods.",
+        "Implemented exploratory data analysis (EDA), data cleaning, feature scaling, and performance evaluation metrics across structured datasets."
+      ]
+    },
+    {
+      "id": "proj_fcc_dawp_demo_data_analyzer",
+      "title": "Fcc Dawp Demo Data Analyzer",
+      "repo_name": "fcc-dawp-demo_data_analyzer",
+      "github_url": "https://github.com/Deepansh-Umar/fcc-dawp-demo_data_analyzer",
+      "live_url": "",
+      "domain_category": "Data Science & Analytics (DS/DA)",
+      "complexity_rating": "Targeted Utility / Academic Project",
+      "primary_language": "Python",
+      "loc_estimate": 159,
+      "tech_stack": [
+        "Pandas",
+        "Python"
+      ],
+      "purpose_summary": "No description provided.",
+      "resume_bullets": [
+        "Demographic Data Analyzer\n\nThis project analyzes demographic data from the 1994 Census database using Pandas.  \nIt provides insights into race distribution, education levels, income, work hours, and occupations.\n\n Proble"
+      ]
+    },
+    {
+      "id": "proj_fcc_dawp_mean_std_dev",
+      "title": "Fcc Dawp Mean Std Dev",
+      "repo_name": "fcc-dawp-mean-std-dev",
+      "github_url": "https://github.com/Deepansh-Umar/fcc-dawp-mean-std-dev",
+      "live_url": "",
+      "domain_category": "Data Science & Analytics (DS/DA)",
+      "complexity_rating": "Targeted Utility / Academic Project",
+      "primary_language": "Python",
+      "loc_estimate": 55,
+      "tech_stack": [
+        "NumPy",
+        "Python"
+      ],
+      "purpose_summary": "No description provided.",
+      "resume_bullets": [
+        "Mean-Variance-Standard Deviation Calculator\n\nThis project calculates the mean, variance, standard deviation, max, min, and sum of the rows, columns, and flattened elements of a 3x3 matrix using **Numpy**.\n\n Problem State"
+      ]
+    },
+    {
+      "id": "proj_fcc_dawp_medical_data_visualizer",
+      "title": "Fcc Dawp Medical Data Visualizer",
+      "repo_name": "fcc-dawp-medical_data_visualizer",
+      "github_url": "https://github.com/Deepansh-Umar/fcc-dawp-medical_data_visualizer",
+      "live_url": "",
+      "domain_category": "Data Science & Analytics (DS/DA)",
+      "complexity_rating": "High Impact Production / Research Project",
+      "primary_language": "Python",
+      "loc_estimate": 122,
+      "tech_stack": [
+        "Matplotlib",
+        "NumPy",
+        "Pandas",
+        "Python",
+        "Seaborn"
+      ],
+      "purpose_summary": "No description provided.",
+      "resume_bullets": [
+        "Medical Data Visualizer\n\nThis project analyzes and visualizes medical examination data to explore the relationship between cardiovascular disease and various health and lifestyle factors. It uses Python with **Pandas**, "
+      ]
+    },
+    {
+      "id": "proj_fcc_dawp_sea_level_predictor",
+      "title": "Fcc Dawp Sea Level Predictor",
+      "repo_name": "fcc-dawp-sea_level_predictor",
+      "github_url": "https://github.com/Deepansh-Umar/fcc-dawp-sea_level_predictor",
+      "live_url": "",
+      "domain_category": "Data Science & Analytics (DS/DA)",
+      "complexity_rating": "High Impact Production / Research Project",
+      "primary_language": "Python",
+      "loc_estimate": 84,
+      "tech_stack": [
+        "Matplotlib",
+        "NumPy",
+        "Pandas",
+        "Python",
+        "SciPy"
+      ],
+      "purpose_summary": "No description provided.",
+      "resume_bullets": [
+        "Sea Level Predictor\n\nThis project analyzes global average sea level change data from 1880 to the present. Using data from the **EPA**, we create visualizations and predictions to estimate sea level rise through the year "
+      ]
+    },
+    {
+      "id": "proj_fcc_dawp_time_series_vizualizer",
+      "title": "Fcc Dawp Time Series Vizualizer",
+      "repo_name": "fcc-dawp-time_series_vizualizer",
+      "github_url": "https://github.com/Deepansh-Umar/fcc-dawp-time_series_vizualizer",
+      "live_url": "",
+      "domain_category": "Data Science & Analytics (DS/DA)",
+      "complexity_rating": "High Impact Production / Research Project",
+      "primary_language": "Python",
+      "loc_estimate": 219,
+      "tech_stack": [
+        "Matplotlib",
+        "NumPy",
+        "Pandas",
+        "Python",
+        "Seaborn"
+      ],
+      "purpose_summary": "No description provided.",
+      "resume_bullets": [
+        "Page View Time Series Visualizer\n\nThis project is part of the **Data Analysis with Python** curriculum on [freeCodeCamp.org](https://www.freecodecamp.org/). The goal is to analyze and visualize time series data using Pan"
+      ]
+    },
+    {
+      "id": "proj_mlp",
+      "title": "Machine Learning Practice (MLP) Repository",
+      "repo_name": "mlp",
+      "github_url": "https://github.com/Deepansh-Umar/MLP",
+      "live_url": "",
+      "domain_category": "Data Science & Analytics (DS/DA)",
+      "complexity_rating": "High Impact Production / Research Project",
+      "primary_language": "Jupyter Notebook",
+      "loc_estimate": 0,
+      "tech_stack": [
+        "Jupyter Notebook",
+        "NumPy",
+        "Pandas",
+        "Python",
+        "Scikit-Learn"
+      ],
+      "purpose_summary": "This is a all in one repo for my MLP theory course at IITM BS",
+      "resume_bullets": [
+        "Developed machine learning workflows for IIT Madras BS Machine Learning Practice course, covering supervised models, decision trees, and ensemble methods.",
+        "Implemented exploratory data analysis (EDA), data cleaning, feature scaling, and performance evaluation metrics across structured datasets."
       ]
     }
   ],
@@ -420,253 +667,6 @@
       "purpose_summary": "No description provided.",
       "resume_bullets": [
         "\u267b\ufe0f ZeroPlast: Plastic-Free Campus & Community Tracker\n\n**ZeroPlast** is a tech-driven, community-powered platform to monitor, reduce, and replace plastic usage in campuses and communities. Built with Flask and designed f"
-      ]
-    }
-  ],
-  "Data Science & Analytics": [
-    {
-      "id": "proj_diabetes_prediction",
-      "title": "Diabetes Prediction",
-      "repo_name": "Diabetes-Prediction",
-      "github_url": "https://github.com/Deepansh-Umar/Diabetes-Prediction",
-      "live_url": "",
-      "domain_category": "Data Science & Analytics",
-      "complexity_rating": "High Impact Production / Research Project",
-      "primary_language": "Python",
-      "loc_estimate": 63,
-      "tech_stack": [
-        "Matplotlib",
-        "NumPy",
-        "Pandas",
-        "Python",
-        "Scikit-Learn",
-        "Seaborn"
-      ],
-      "purpose_summary": "No description provided.",
-      "resume_bullets": [
-        "Diabetes Prediction\n\nThis project predicts the likelihood of diabetes using a public dataset and scikit-learn. \n\n  Dataset\n- [PIMA Indian Diabetes Dataset](https://www.kaggle.com/datasets/uciml/pima-indians-diabetes-data"
-      ]
-    },
-    {
-      "id": "proj_heavy_machine_price_prediction",
-      "title": "Heavy Machine Price Prediction",
-      "repo_name": "Heavy-Machine-Price-Prediction",
-      "github_url": "https://github.com/Deepansh-Umar/Heavy-Machine-Price-Prediction",
-      "live_url": "",
-      "domain_category": "Data Science & Analytics",
-      "complexity_rating": "Targeted Utility / Academic Project",
-      "primary_language": "Jupyter Notebook",
-      "loc_estimate": 1,
-      "tech_stack": [
-        "Jupyter Notebook"
-      ],
-      "purpose_summary": "No description provided.",
-      "resume_bullets": [
-        "Heavy Machine Price Prediction\n\nThis repository contains the dataset and machine learning solution for predicting the selling price of heavy industrial machinery and equipment lifecycles.\n\n Project Overview\n\nThe dataset "
-      ]
-    },
-    {
-      "id": "proj_mlp",
-      "title": "Machine Learning Practice (MLP) Repository",
-      "repo_name": "MLP",
-      "github_url": "https://github.com/Deepansh-Umar/MLP",
-      "live_url": "",
-      "domain_category": "Data Science & Analytics",
-      "complexity_rating": "High Impact Production / Research Project",
-      "primary_language": "Jupyter Notebook",
-      "loc_estimate": 6622,
-      "tech_stack": [
-        "Jupyter Notebook",
-        "NumPy",
-        "Pandas",
-        "Python",
-        "Scikit-Learn"
-      ],
-      "purpose_summary": "This is a all in one repo for my MLP theory course at IITM BS",
-      "resume_bullets": [
-        "Developed machine learning workflows for IIT Madras BS Machine Learning Practice course, covering supervised models, decision trees, and ensemble methods.",
-        "Implemented exploratory data analysis (EDA), data cleaning, feature scaling, and performance evaluation metrics across structured datasets."
-      ]
-    },
-    {
-      "id": "proj_california_housing_price_prediction",
-      "title": "California Housing Price Prediction",
-      "repo_name": "california_housing_price_prediction",
-      "github_url": "https://github.com/Deepansh-Umar/california_housing_price_prediction",
-      "live_url": "",
-      "domain_category": "Data Science & Analytics",
-      "complexity_rating": "Targeted Utility / Academic Project",
-      "primary_language": "Jupyter Notebook",
-      "loc_estimate": 1,
-      "tech_stack": [
-        "Jupyter Notebook"
-      ],
-      "purpose_summary": "No description provided.",
-      "resume_bullets": [
-        "\ud83c\udfe1 California Housing Price Prediction\n\nThis project predicts **median house values** in California districts using **Machine Learning**.  \nThe dataset contains housing, population, and income features, along with categor"
-      ]
-    },
-    {
-      "id": "proj_diabetes_prediction",
-      "title": "Diabetes Prediction",
-      "repo_name": "diabetes-prediction",
-      "github_url": "https://github.com/Deepansh-Umar/Diabetes-Prediction",
-      "live_url": "",
-      "domain_category": "Data Science & Analytics",
-      "complexity_rating": "Targeted Utility / Academic Project",
-      "primary_language": "Python",
-      "loc_estimate": 0,
-      "tech_stack": [
-        "Python"
-      ],
-      "purpose_summary": "No description provided.",
-      "resume_bullets": [
-        "Engineered custom application utilizing Python."
-      ]
-    },
-    {
-      "id": "proj_fcc_dawp_demo_data_analyzer",
-      "title": "Fcc Dawp Demo Data Analyzer",
-      "repo_name": "fcc-dawp-demo_data_analyzer",
-      "github_url": "https://github.com/Deepansh-Umar/fcc-dawp-demo_data_analyzer",
-      "live_url": "",
-      "domain_category": "Data Science & Analytics",
-      "complexity_rating": "Targeted Utility / Academic Project",
-      "primary_language": "Python",
-      "loc_estimate": 159,
-      "tech_stack": [
-        "Pandas",
-        "Python"
-      ],
-      "purpose_summary": "No description provided.",
-      "resume_bullets": [
-        "Demographic Data Analyzer\n\nThis project analyzes demographic data from the 1994 Census database using Pandas.  \nIt provides insights into race distribution, education levels, income, work hours, and occupations.\n\n Proble"
-      ]
-    },
-    {
-      "id": "proj_fcc_dawp_mean_std_dev",
-      "title": "Fcc Dawp Mean Std Dev",
-      "repo_name": "fcc-dawp-mean-std-dev",
-      "github_url": "https://github.com/Deepansh-Umar/fcc-dawp-mean-std-dev",
-      "live_url": "",
-      "domain_category": "Data Science & Analytics",
-      "complexity_rating": "Targeted Utility / Academic Project",
-      "primary_language": "Python",
-      "loc_estimate": 55,
-      "tech_stack": [
-        "NumPy",
-        "Python"
-      ],
-      "purpose_summary": "No description provided.",
-      "resume_bullets": [
-        "Mean-Variance-Standard Deviation Calculator\n\nThis project calculates the mean, variance, standard deviation, max, min, and sum of the rows, columns, and flattened elements of a 3x3 matrix using **Numpy**.\n\n Problem State"
-      ]
-    },
-    {
-      "id": "proj_fcc_dawp_medical_data_visualizer",
-      "title": "Fcc Dawp Medical Data Visualizer",
-      "repo_name": "fcc-dawp-medical_data_visualizer",
-      "github_url": "https://github.com/Deepansh-Umar/fcc-dawp-medical_data_visualizer",
-      "live_url": "",
-      "domain_category": "Data Science & Analytics",
-      "complexity_rating": "High Impact Production / Research Project",
-      "primary_language": "Python",
-      "loc_estimate": 122,
-      "tech_stack": [
-        "Matplotlib",
-        "NumPy",
-        "Pandas",
-        "Python",
-        "Seaborn"
-      ],
-      "purpose_summary": "No description provided.",
-      "resume_bullets": [
-        "Medical Data Visualizer\n\nThis project analyzes and visualizes medical examination data to explore the relationship between cardiovascular disease and various health and lifestyle factors. It uses Python with **Pandas**, "
-      ]
-    },
-    {
-      "id": "proj_fcc_dawp_sea_level_predictor",
-      "title": "Fcc Dawp Sea Level Predictor",
-      "repo_name": "fcc-dawp-sea_level_predictor",
-      "github_url": "https://github.com/Deepansh-Umar/fcc-dawp-sea_level_predictor",
-      "live_url": "",
-      "domain_category": "Data Science & Analytics",
-      "complexity_rating": "High Impact Production / Research Project",
-      "primary_language": "Python",
-      "loc_estimate": 84,
-      "tech_stack": [
-        "Matplotlib",
-        "NumPy",
-        "Pandas",
-        "Python",
-        "SciPy"
-      ],
-      "purpose_summary": "No description provided.",
-      "resume_bullets": [
-        "Sea Level Predictor\n\nThis project analyzes global average sea level change data from 1880 to the present. Using data from the **EPA**, we create visualizations and predictions to estimate sea level rise through the year "
-      ]
-    },
-    {
-      "id": "proj_fcc_dawp_time_series_vizualizer",
-      "title": "Fcc Dawp Time Series Vizualizer",
-      "repo_name": "fcc-dawp-time_series_vizualizer",
-      "github_url": "https://github.com/Deepansh-Umar/fcc-dawp-time_series_vizualizer",
-      "live_url": "",
-      "domain_category": "Data Science & Analytics",
-      "complexity_rating": "High Impact Production / Research Project",
-      "primary_language": "Python",
-      "loc_estimate": 219,
-      "tech_stack": [
-        "Matplotlib",
-        "NumPy",
-        "Pandas",
-        "Python",
-        "Seaborn"
-      ],
-      "purpose_summary": "No description provided.",
-      "resume_bullets": [
-        "Page View Time Series Visualizer\n\nThis project is part of the **Data Analysis with Python** curriculum on [freeCodeCamp.org](https://www.freecodecamp.org/). The goal is to analyze and visualize time series data using Pan"
-      ]
-    },
-    {
-      "id": "proj_heavy_machine_price_prediction",
-      "title": "Heavy Machine Price Prediction",
-      "repo_name": "heavy-machine-price-prediction",
-      "github_url": "https://github.com/Deepansh-Umar/Heavy-Machine-Price-Prediction",
-      "live_url": "",
-      "domain_category": "Data Science & Analytics",
-      "complexity_rating": "Targeted Utility / Academic Project",
-      "primary_language": "Jupyter Notebook",
-      "loc_estimate": 0,
-      "tech_stack": [
-        "Jupyter Notebook"
-      ],
-      "purpose_summary": "No description provided.",
-      "resume_bullets": [
-        "Engineered custom application utilizing Jupyter Notebook."
-      ]
-    },
-    {
-      "id": "proj_mlp",
-      "title": "Machine Learning Practice (MLP) Repository",
-      "repo_name": "mlp",
-      "github_url": "https://github.com/Deepansh-Umar/MLP",
-      "live_url": "",
-      "domain_category": "Data Science & Analytics",
-      "complexity_rating": "High Impact Production / Research Project",
-      "primary_language": "Jupyter Notebook",
-      "loc_estimate": 0,
-      "tech_stack": [
-        "Jupyter Notebook",
-        "NumPy",
-        "Pandas",
-        "Python",
-        "Scikit-Learn"
-      ],
-      "purpose_summary": "This is a all in one repo for my MLP theory course at IITM BS",
-      "resume_bullets": [
-        "Developed machine learning workflows for IIT Madras BS Machine Learning Practice course, covering supervised models, decision trees, and ensemble methods.",
-        "Implemented exploratory data analysis (EDA), data cleaning, feature scaling, and performance evaluation metrics across structured datasets."
       ]
     }
   ],

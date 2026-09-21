@@ -21,21 +21,26 @@ EXCLUDED_REPOS = {
 
 # Accurate Domain Classification Map based on deep codebase inspection
 EXACT_DOMAIN_MAP = {
+    # 1. NLP & Large Language Models (LLMs)
     "personal-rag": "NLP & Large Language Models (LLMs)",
-    "text_sentiment_classification": "AI & Machine Learning",
-    "phrase-sentiment-analysis": "AI & Machine Learning",
-    "mcq-solver": "AI & Machine Learning",
 
-    "heavy-machine-price-prediction": "Data Science & Analytics",
-    "california_housing_price_prediction": "Data Science & Analytics",
-    "diabetes-prediction": "Data Science & Analytics",
-    "mlp": "Data Science & Analytics",
-    "fcc-dawp-medical_data_visualizer": "Data Science & Analytics",
-    "fcc-dawp-time_series_vizualizer": "Data Science & Analytics",
-    "fcc-dawp-sea_level_predictor": "Data Science & Analytics",
-    "fcc-dawp-demo_data_analyzer": "Data Science & Analytics",
-    "fcc-dawp-mean-std-dev": "Data Science & Analytics",
+    # 2. AI & Machine Learning (ML/DL) - Model Building, Algorithms, Pipelines
+    "text_sentiment_classification": "AI & Machine Learning (ML/DL)",
+    "phrase-sentiment-analysis": "AI & Machine Learning (ML/DL)",
+    "mcq-solver": "AI & Machine Learning (ML/DL)",
+    "heavy-machine-price-prediction": "AI & Machine Learning (ML/DL)",
+    "california_housing_price_prediction": "AI & Machine Learning (ML/DL)",
+    "diabetes-prediction": "AI & Machine Learning (ML/DL)",
 
+    # 3. Data Science & Analytics (DS/DA) - EDA, Statistics, Data Wrangling, Visualization
+    "mlp": "Data Science & Analytics (DS/DA)",
+    "fcc-dawp-medical_data_visualizer": "Data Science & Analytics (DS/DA)",
+    "fcc-dawp-time_series_vizualizer": "Data Science & Analytics (DS/DA)",
+    "fcc-dawp-sea_level_predictor": "Data Science & Analytics (DS/DA)",
+    "fcc-dawp-demo_data_analyzer": "Data Science & Analytics (DS/DA)",
+    "fcc-dawp-mean-std-dev": "Data Science & Analytics (DS/DA)",
+
+    # 4. Web Engineering & Full-Stack Systems
     "parkease-v2": "Web Engineering & Full-Stack Systems",
     "parkease": "Web Engineering & Full-Stack Systems",
     "zeroplast": "Web Engineering & Full-Stack Systems",
@@ -47,6 +52,7 @@ EXACT_DOMAIN_MAP = {
     "dsa-squad": "Web Engineering & Full-Stack Systems",
     "academic-utility-app": "Web Engineering & Full-Stack Systems",
 
+    # 5. System Utilities & Software Tools
     "file-organizer": "System Utilities & Software Tools",
     "hospital-management": "System Utilities & Software Tools",
     "student-management": "System Utilities & Software Tools",
@@ -84,10 +90,10 @@ def build_master_project_store():
 
     master_projects = []
     category_map: Dict[str, List[Dict[str, Any]]] = {
-        "AI & Machine Learning": [],
+        "AI & Machine Learning (ML/DL)": [],
+        "Data Science & Analytics (DS/DA)": [],
         "NLP & Large Language Models (LLMs)": [],
         "Web Engineering & Full-Stack Systems": [],
-        "Data Science & Analytics": [],
         "System Utilities & Software Tools": []
     }
 

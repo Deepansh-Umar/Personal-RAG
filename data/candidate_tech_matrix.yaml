@@ -1,10 +1,10 @@
 candidate: Deepansh Umar
 total_original_projects_analyzed: 41
 excluded_non_original_repos:
-- leetcode
-- deepansh-umar
-- gcc-bose-cgit
 - resources
+- deepansh-umar
+- leetcode
+- gcc-bose-cgit
 programming_languages:
 - Bash
 - C

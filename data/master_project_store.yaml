@@ -38,7 +38,7 @@
   repo_name: Diabetes-Prediction
   github_url: https://github.com/Deepansh-Umar/Diabetes-Prediction
   live_url: ''
-  domain_category: Data Science & Analytics
+  domain_category: AI & Machine Learning (ML/DL)
   complexity_rating: High Impact Production / Research Project
   primary_language: Python
   loc_estimate: 63
@@ -58,7 +58,7 @@
   repo_name: Heavy-Machine-Price-Prediction
   github_url: https://github.com/Deepansh-Umar/Heavy-Machine-Price-Prediction
   live_url: ''
-  domain_category: Data Science & Analytics
+  domain_category: AI & Machine Learning (ML/DL)
   complexity_rating: Targeted Utility / Academic Project
   primary_language: Jupyter Notebook
   loc_estimate: 1
@@ -90,7 +90,7 @@
   repo_name: MCQ-Solver
   github_url: https://github.com/Deepansh-Umar/MCQ-Solver
   live_url: ''
-  domain_category: AI & Machine Learning
+  domain_category: AI & Machine Learning (ML/DL)
   complexity_rating: High Impact Production / Research Project
   primary_language: Python
   loc_estimate: 458
@@ -109,7 +109,7 @@
   repo_name: MLP
   github_url: https://github.com/Deepansh-Umar/MLP
   live_url: ''
-  domain_category: Data Science & Analytics
+  domain_category: Data Science & Analytics (DS/DA)
   complexity_rating: High Impact Production / Research Project
   primary_language: Jupyter Notebook
   loc_estimate: 6622
@@ -316,7 +316,7 @@
   repo_name: california_housing_price_prediction
   github_url: https://github.com/Deepansh-Umar/california_housing_price_prediction
   live_url: ''
-  domain_category: Data Science & Analytics
+  domain_category: AI & Machine Learning (ML/DL)
   complexity_rating: Targeted Utility / Academic Project
   primary_language: Jupyter Notebook
   loc_estimate: 1
@@ -332,7 +332,7 @@
   repo_name: diabetes-prediction
   github_url: https://github.com/Deepansh-Umar/Diabetes-Prediction
   live_url: ''
-  domain_category: Data Science & Analytics
+  domain_category: AI & Machine Learning (ML/DL)
   complexity_rating: Targeted Utility / Academic Project
   primary_language: Python
   loc_estimate: 0
@@ -360,7 +360,7 @@
   repo_name: fcc-dawp-demo_data_analyzer
   github_url: https://github.com/Deepansh-Umar/fcc-dawp-demo_data_analyzer
   live_url: ''
-  domain_category: Data Science & Analytics
+  domain_category: Data Science & Analytics (DS/DA)
   complexity_rating: Targeted Utility / Academic Project
   primary_language: Python
   loc_estimate: 159
@@ -377,7 +377,7 @@
   repo_name: fcc-dawp-mean-std-dev
   github_url: https://github.com/Deepansh-Umar/fcc-dawp-mean-std-dev
   live_url: ''
-  domain_category: Data Science & Analytics
+  domain_category: Data Science & Analytics (DS/DA)
   complexity_rating: Targeted Utility / Academic Project
   primary_language: Python
   loc_estimate: 55
@@ -394,7 +394,7 @@
   repo_name: fcc-dawp-medical_data_visualizer
   github_url: https://github.com/Deepansh-Umar/fcc-dawp-medical_data_visualizer
   live_url: ''
-  domain_category: Data Science & Analytics
+  domain_category: Data Science & Analytics (DS/DA)
   complexity_rating: High Impact Production / Research Project
   primary_language: Python
   loc_estimate: 122
@@ -417,7 +417,7 @@
   repo_name: fcc-dawp-sea_level_predictor
   github_url: https://github.com/Deepansh-Umar/fcc-dawp-sea_level_predictor
   live_url: ''
-  domain_category: Data Science & Analytics
+  domain_category: Data Science & Analytics (DS/DA)
   complexity_rating: High Impact Production / Research Project
   primary_language: Python
   loc_estimate: 84
@@ -440,7 +440,7 @@
   repo_name: fcc-dawp-time_series_vizualizer
   github_url: https://github.com/Deepansh-Umar/fcc-dawp-time_series_vizualizer
   live_url: ''
-  domain_category: Data Science & Analytics
+  domain_category: Data Science & Analytics (DS/DA)
   complexity_rating: High Impact Production / Research Project
   primary_language: Python
   loc_estimate: 219
@@ -510,7 +510,7 @@
   repo_name: heavy-machine-price-prediction
   github_url: https://github.com/Deepansh-Umar/Heavy-Machine-Price-Prediction
   live_url: ''
-  domain_category: Data Science & Analytics
+  domain_category: AI & Machine Learning (ML/DL)
   complexity_rating: Targeted Utility / Academic Project
   primary_language: Jupyter Notebook
   loc_estimate: 0
@@ -540,7 +540,7 @@
   repo_name: mcq-solver
   github_url: https://github.com/Deepansh-Umar/MCQ-Solver
   live_url: ''
-  domain_category: AI & Machine Learning
+  domain_category: AI & Machine Learning (ML/DL)
   complexity_rating: Targeted Utility / Academic Project
   primary_language: Python
   loc_estimate: 0
@@ -554,7 +554,7 @@
   repo_name: mlp
   github_url: https://github.com/Deepansh-Umar/MLP
   live_url: ''
-  domain_category: Data Science & Analytics
+  domain_category: Data Science & Analytics (DS/DA)
   complexity_rating: High Impact Production / Research Project
   primary_language: Jupyter Notebook
   loc_estimate: 0
@@ -684,7 +684,7 @@
   repo_name: text_sentiment_classification
   github_url: https://github.com/Deepansh-Umar/text_sentiment_classification
   live_url: ''
-  domain_category: AI & Machine Learning
+  domain_category: AI & Machine Learning (ML/DL)
   complexity_rating: Core Application Project
   primary_language: Jupyter Notebook
   loc_estimate: 1457
