@@ -11,19 +11,62 @@ def safe_print(msg: str):
     except UnicodeEncodeError:
         print(msg.encode('ascii', 'ignore').decode('ascii'))
 
+# Repositories to strictly EXCLUDE from Original Software Projects (Forks, Profile READMEs, Raw Markdown Notes, Placeholders)
+EXCLUDED_REPOS = {
+    "leetcode",          # LeetHub auto-synced competitive coding solutions
+    "resources",         # Raw Markdown learning roadmaps / notes
+    "deepansh-umar",     # GitHub profile README repo
+    "gcc-bose-cgit"      # Static HTML placeholder
+}
+
+# Accurate Domain Classification Map based on deep codebase inspection
+EXACT_DOMAIN_MAP = {
+    "personal-rag": "NLP & Large Language Models (LLMs)",
+    "text_sentiment_classification": "AI & Machine Learning",
+    "phrase-sentiment-analysis": "AI & Machine Learning",
+    "mcq-solver": "AI & Machine Learning",
+
+    "heavy-machine-price-prediction": "Data Science & Analytics",
+    "california_housing_price_prediction": "Data Science & Analytics",
+    "diabetes-prediction": "Data Science & Analytics",
+    "mlp": "Data Science & Analytics",
+    "fcc-dawp-medical_data_visualizer": "Data Science & Analytics",
+    "fcc-dawp-time_series_vizualizer": "Data Science & Analytics",
+    "fcc-dawp-sea_level_predictor": "Data Science & Analytics",
+    "fcc-dawp-demo_data_analyzer": "Data Science & Analytics",
+    "fcc-dawp-mean-std-dev": "Data Science & Analytics",
+
+    "parkease-v2": "Web Engineering & Full-Stack Systems",
+    "parkease": "Web Engineering & Full-Stack Systems",
+    "zeroplast": "Web Engineering & Full-Stack Systems",
+    "sih-autohmpi": "Web Engineering & Full-Stack Systems",
+    "url-shortner": "Web Engineering & Full-Stack Systems",
+    "url-shortener": "Web Engineering & Full-Stack Systems",
+    "tds": "Web Engineering & Full-Stack Systems",
+    "tesseract_iitm_club": "Web Engineering & Full-Stack Systems",
+    "dsa-squad": "Web Engineering & Full-Stack Systems",
+    "academic-utility-app": "Web Engineering & Full-Stack Systems",
+
+    "file-organizer": "System Utilities & Software Tools",
+    "hospital-management": "System Utilities & Software Tools",
+    "student-management": "System Utilities & Software Tools",
+    "nirmaan-os": "System Utilities & Software Tools",
+    "fcc-scwp-polygon-area": "System Utilities & Software Tools",
+    "fcc-scwp-probability-calc": "System Utilities & Software Tools"
+}
+
 def build_master_project_store():
     base_dir = Path(__file__).parent.parent
     data_dir = base_dir / "data"
-    
+
     analysis_cache_path = data_dir / "codebase_analysis_cache.json"
     gh_extract_path = data_dir / "github_deep_extract.yaml"
     career_evidence_path = data_dir / "career_evidence.yaml"
-    
+
     master_store_path = data_dir / "master_project_store.yaml"
     tech_matrix_path = data_dir / "candidate_tech_matrix.yaml"
     category_index_path = data_dir / "projects_by_category.json"
 
-    # Load input data sources
     analysis_cache = {}
     if analysis_cache_path.exists():
         with open(analysis_cache_path, "r", encoding="utf-8") as f:
@@ -41,15 +84,13 @@ def build_master_project_store():
 
     master_projects = []
     category_map: Dict[str, List[Dict[str, Any]]] = {
-        "AI & Deep Learning": [],
+        "AI & Machine Learning": [],
         "NLP & Large Language Models (LLMs)": [],
         "Web Engineering & Full-Stack Systems": [],
         "Data Science & Analytics": [],
-        "Data Structures & Algorithms / Problem Solving": [],
-        "System Utilities & Automation": []
+        "System Utilities & Software Tools": []
     }
 
-    # Track all discovered tech skills
     all_languages: Set[str] = set()
     all_aiml: Set[str] = set()
     all_nlp_rag: Set[str] = set()
@@ -58,28 +99,31 @@ def build_master_project_store():
     all_databases: Set[str] = set()
     all_tools: Set[str] = set()
 
-    # Seed skills from career evidence
     ce_projects = career_evidence.get("projects", [])
     ce_map = {p.get("github_url", "").lower().rstrip('/'): p for p in ce_projects}
-
-    # Index gh_extract
     gh_map = {g.get("repo_name", "").lower(): g for g in gh_extract}
 
     all_repo_names = sorted(list(set(list(analysis_cache.keys()) + list(gh_map.keys()))))
 
-    safe_print(f"[Phase 3] Building Master Knowledge Store for {len(all_repo_names)} repositories...")
+    safe_print(f"[Phase 3] Building Master Knowledge Store for original candidate projects...")
 
     for rname in all_repo_names:
+        rname_lower = rname.lower()
+
+        # Filter out external forks, profile READMEs, and non-project resources
+        if rname_lower in EXCLUDED_REPOS:
+            safe_print(f" [-] Excluded non-original/fork repo: {rname}")
+            continue
+
         ac = analysis_cache.get(rname, {})
-        gh = gh_map.get(rname.lower(), {})
-        
+        gh = gh_map.get(rname_lower, {})
         repo_url = gh.get("github_url", f"https://github.com/Deepansh-Umar/{rname}")
         ce_match = ce_map.get(repo_url.lower().rstrip('/'), {})
 
         # Determine Title
         if ce_match.get("title"):
             title = ce_match["title"]
-        elif gh.get("title") and gh["title"] != "Title":
+        elif gh.get("title") and gh["title"] != "Title" and gh["title"] != rname:
             title = gh["title"]
         else:
             title = rname.replace("-", " ").replace("_", " ").title()
@@ -93,38 +137,25 @@ def build_master_project_store():
 
         tech_list = sorted(list(tech_set))
 
-        # Domain category
-        cat = ac.get("domain_category", "System Utilities & Automation")
-        if "AI / Machine Learning" in cat or "Deep Learning" in cat or "PyTorch" in tech_list or "HuggingFace Transformers" in tech_list:
-            norm_cat = "AI & Deep Learning"
-        elif "NLP" in cat or "LLM" in cat or any(x in tech_list for x in ["RAG", "ChromaDB", "SentenceTransformers", "Ollama", "Google Gemini API"]):
-            norm_cat = "NLP & Large Language Models (LLMs)"
-        elif "Web" in cat or any(x in tech_list for x in ["Flask", "FastAPI", "React", "Vue.js", "Express.js", "Celery", "PostgreSQL"]):
-            norm_cat = "Web Engineering & Full-Stack Systems"
-        elif "Data Science" in cat or any(x in tech_list for x in ["Pandas", "Matplotlib", "Seaborn"]):
-            norm_cat = "Data Science & Analytics"
-        elif "DSA" in cat or "leetcode" in rname.lower() or "dsa" in rname.lower():
-            norm_cat = "Data Structures & Algorithms / Problem Solving"
-        else:
-            norm_cat = "System Utilities & Automation"
+        # Assign exact domain based on deep codebase audit
+        norm_cat = EXACT_DOMAIN_MAP.get(rname_lower, "System Utilities & Software Tools")
 
         # Complexity rating
         loc = ac.get("total_loc", 0)
         if loc > 1500 or len(tech_list) >= 5 or ce_match:
-            complexity = "High Impact Production / Research"
-        elif loc > 400 or len(tech_list) >= 3:
-            complexity = "Medium System Application"
+            complexity = "High Impact Production / Research Project"
+        elif loc > 300 or len(tech_list) >= 3:
+            complexity = "Core Application Project"
         else:
-            complexity = "Foundation Repository"
+            complexity = "Targeted Utility / Academic Project"
 
-        # Resume Bullets Generation / Merging
+        # Resume Bullets Generation
         bullets = []
         if ce_match.get("bullets"):
             for b in ce_match["bullets"]:
                 b_text = b.get("text") if isinstance(b, dict) else str(b)
                 bullets.append(b_text)
         else:
-            # Generate bullet from README / description / codebase
             desc = gh.get("description", "")
             readme_excerpt = ac.get("readme_excerpt", "")
             if desc and desc != "No description provided.":
@@ -133,14 +164,10 @@ def build_master_project_store():
                 clean_r = readme_excerpt.replace('#', '').strip()
                 bullets.append(clean_r[:220])
             else:
-                bullets.append(f"Engineered custom software repository utilizing {', '.join(tech_list[:3]) if tech_list else 'modern programming principles'}.")
-
-            # Add structured codebase bullet
-            if loc > 0:
-                bullets.append(f"Maintained clean repository architecture spanning {loc} lines of code across {len(ac.get('file_sample', []))} module files.")
+                bullets.append(f"Engineered custom application utilizing {', '.join(tech_list[:3]) if tech_list else 'modern programming principles'}.")
 
         proj_entry = {
-            "id": f"proj_{rname.lower().replace('-', '_')}",
+            "id": f"proj_{rname_lower.replace('-', '_')}",
             "title": title,
             "repo_name": rname,
             "github_url": repo_url,
@@ -151,16 +178,15 @@ def build_master_project_store():
             "loc_estimate": loc,
             "tech_stack": tech_list,
             "purpose_summary": gh.get("description", "") or ac.get("readme_excerpt", "")[:300],
-            "key_files": ac.get("file_sample", [])[:10],
             "resume_bullets": bullets
         }
 
         master_projects.append(proj_entry)
-        category_map[norm_cat].append(proj_entry)
+        if norm_cat in category_map:
+            category_map[norm_cat].append(proj_entry)
 
-        # Aggregate candidate skills taxonomy
+        # Aggregate verified skills taxonomy
         for t in tech_list:
-            tl = t.lower()
             if t in ["Python", "Java", "C", "C++", "JavaScript", "TypeScript", "SQL", "HTML", "CSS", "Bash"]:
                 all_languages.add(t)
             elif t in ["PyTorch", "TensorFlow", "Keras", "Scikit-Learn", "LightGBM", "XGBoost", "OpenCV", "Pillow", "SciPy"]:
@@ -179,12 +205,13 @@ def build_master_project_store():
     # Save master_project_store.yaml
     with open(master_store_path, "w", encoding="utf-8") as f:
         yaml.dump(master_projects, f, default_flow_style=False, sort_keys=False)
-    safe_print(f" [+] Master Project Knowledge Store written: {master_store_path} ({len(master_projects)} projects)")
+    safe_print(f" [+] Master Project Knowledge Store written: {master_store_path} ({len(master_projects)} original projects)")
 
     # Save candidate_tech_matrix.yaml
     candidate_tech_matrix = {
         "candidate": "Deepansh Umar",
-        "total_repositories_analyzed": len(master_projects),
+        "total_original_projects_analyzed": len(master_projects),
+        "excluded_non_original_repos": list(EXCLUDED_REPOS),
         "programming_languages": sorted(list(all_languages | {"Python", "Java", "SQL", "JavaScript", "HTML/CSS", "React", "Bash", "C/C++"})),
         "ai_ml_deep_learning": sorted(list(all_aiml | {"PyTorch", "Scikit-Learn", "LightGBM", "XGBoost", "OpenCV"})),
         "nlp_rag_llms": sorted(list(all_nlp_rag | {"Claude API", "Gemini API", "RAG", "ChromaDB", "SentenceTransformers", "Ollama", "LangGraph"})),
@@ -203,7 +230,7 @@ def build_master_project_store():
         json.dump(category_map, f, indent=2)
     safe_print(f" [+] Projects by Category Index written: {category_index_path}")
 
-    safe_print("\n================ MASTER STORE SUMMARY ================")
+    safe_print("\n================ AUDITED MASTER STORE SUMMARY ================")
     for cat_name, proj_list in category_map.items():
         safe_print(f" - {cat_name}: {len(proj_list)} projects")
 

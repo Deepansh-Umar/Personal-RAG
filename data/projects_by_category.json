@@ -1,13 +1,13 @@
 {
-  "AI & Deep Learning": [
+  "AI & Machine Learning": [
     {
       "id": "proj_mcq_solver",
       "title": "Mcq Solver",
       "repo_name": "MCQ-Solver",
       "github_url": "https://github.com/Deepansh-Umar/MCQ-Solver",
       "live_url": "",
-      "domain_category": "AI & Deep Learning",
-      "complexity_rating": "High Impact Production / Research",
+      "domain_category": "AI & Machine Learning",
+      "complexity_rating": "High Impact Production / Research Project",
       "primary_language": "Python",
       "loc_estimate": 458,
       "tech_stack": [
@@ -19,118 +19,48 @@
         "Streamlit"
       ],
       "purpose_summary": "No description provided.",
-      "key_files": [
-        "app.py",
-        "app_electra.py",
-        "app_mlp.py",
-        "requirements.txt"
-      ],
       "resume_bullets": [
-        "Engineered custom software repository utilizing HuggingFace Transformers, NumPy, PyTorch.",
-        "Maintained clean repository architecture spanning 458 lines of code across 4 module files."
+        "Engineered custom application utilizing HuggingFace Transformers, NumPy, PyTorch."
       ]
     },
     {
-      "id": "proj_california_housing_price_prediction",
-      "title": "California Housing Price Prediction",
-      "repo_name": "california_housing_price_prediction",
-      "github_url": "https://github.com/Deepansh-Umar/california_housing_price_prediction",
+      "id": "proj_mcq_solver",
+      "title": "Mcq Solver",
+      "repo_name": "mcq-solver",
+      "github_url": "https://github.com/Deepansh-Umar/MCQ-Solver",
       "live_url": "",
-      "domain_category": "AI & Deep Learning",
-      "complexity_rating": "Foundation Repository",
+      "domain_category": "AI & Machine Learning",
+      "complexity_rating": "Targeted Utility / Academic Project",
+      "primary_language": "Python",
+      "loc_estimate": 0,
+      "tech_stack": [
+        "Python"
+      ],
+      "purpose_summary": "No description provided.",
+      "resume_bullets": [
+        "Engineered custom application utilizing Python."
+      ]
+    },
+    {
+      "id": "proj_text_sentiment_classification",
+      "title": "Text Sentiment Classification",
+      "repo_name": "text_sentiment_classification",
+      "github_url": "https://github.com/Deepansh-Umar/text_sentiment_classification",
+      "live_url": "",
+      "domain_category": "AI & Machine Learning",
+      "complexity_rating": "Core Application Project",
       "primary_language": "Jupyter Notebook",
-      "loc_estimate": 1,
+      "loc_estimate": 1457,
       "tech_stack": [
         "Jupyter Notebook"
       ],
       "purpose_summary": "No description provided.",
-      "key_files": [
-        "California_Housing_Price.ipynb",
-        "README.md"
-      ],
       "resume_bullets": [
-        "\ud83c\udfe1 California Housing Price Prediction\n\nThis project predicts **median house values** in California districts using **Machine Learning**.  \nThe dataset contains housing, population, and income features, along with categor",
-        "Maintained clean repository architecture spanning 1 lines of code across 2 module files."
+        "Phrase Sentiment Analysis and Machine Learning Pipeline\n\n Project Overview\nThis project delivers an end-to-end natural language processing (NLP) and machine \nlearning classification engine built to predict sentiment prof"
       ]
     }
   ],
   "NLP & Large Language Models (LLMs)": [
-    {
-      "id": "proj_academic_utility_app",
-      "title": "Academic Utility App",
-      "repo_name": "Academic-Utility-App",
-      "github_url": "https://github.com/Deepansh-Umar/Academic-Utility-App",
-      "live_url": "https://academic-utility-app.vercel.app",
-      "domain_category": "NLP & Large Language Models (LLMs)",
-      "complexity_rating": "Medium System Application",
-      "primary_language": "JavaScript",
-      "loc_estimate": 665,
-      "tech_stack": [
-        "CSS",
-        "HTML",
-        "JavaScript"
-      ],
-      "purpose_summary": "No description provided.",
-      "key_files": [
-        "index.html",
-        "README.md",
-        "static\\css\\style.css",
-        "static\\js\\cgpa.js",
-        "static\\js\\grades.js",
-        "templates\\cgpa.html",
-        "templates\\grades.html"
-      ],
-      "resume_bullets": [
-        "Academic Utility App \u2013 CGPA Calculator & Grade Tools\n\n Video Demo : https://drive.google.com/file/d/1Uz8JlnSUZp0bh6ItaJ9bVOexADHLSY5C/view?usp=sharing\n Overview\n\nThis project is a browser-based academic utility applicati",
-        "Maintained clean repository architecture spanning 665 lines of code across 7 module files."
-      ]
-    },
-    {
-      "id": "proj_deepansh_umar",
-      "title": "Deepansh Umar",
-      "repo_name": "Deepansh-Umar",
-      "github_url": "https://github.com/Deepansh-Umar/Deepansh-Umar",
-      "live_url": "",
-      "domain_category": "NLP & Large Language Models (LLMs)",
-      "complexity_rating": "Foundation Repository",
-      "primary_language": "N/A",
-      "loc_estimate": 0,
-      "tech_stack": [],
-      "purpose_summary": "No description provided.",
-      "key_files": [
-        "README.md",
-        "assets\\header.png",
-        "assets\\header_img.png"
-      ],
-      "resume_bullets": [
-        "<div align=\"center\">\n  <img src=\"https://readme-typing-svg.herokuapp.com?font=Fira+Code&size=32&duration=2800&pause=2000&color=6AD3F0&center=true&vCenter=true&width=940&lines=Hey+there!+I'm+Deepansh+%F0%9F%91%8B;ML+%2F+F"
-      ]
-    },
-    {
-      "id": "proj_heavy_machine_price_prediction",
-      "title": "Heavy Machine Price Prediction",
-      "repo_name": "Heavy-Machine-Price-Prediction",
-      "github_url": "https://github.com/Deepansh-Umar/Heavy-Machine-Price-Prediction",
-      "live_url": "",
-      "domain_category": "NLP & Large Language Models (LLMs)",
-      "complexity_rating": "Foundation Repository",
-      "primary_language": "Jupyter Notebook",
-      "loc_estimate": 1,
-      "tech_stack": [
-        "Jupyter Notebook"
-      ],
-      "purpose_summary": "No description provided.",
-      "key_files": [
-        "Heavy_Machine_Price_Prediction.ipynb",
-        "README.md",
-        "data\\test.csv",
-        "data\\train.csv"
-      ],
-      "resume_bullets": [
-        "Heavy Machine Price Prediction\n\nThis repository contains the dataset and machine learning solution for predicting the selling price of heavy industrial machinery and equipment lifecycles.\n\n Project Overview\n\nThe dataset ",
-        "Maintained clean repository architecture spanning 1 lines of code across 4 module files."
-      ]
-    },
     {
       "id": "proj_personal_rag",
       "title": "Personal Career RAG & Agentic Assistant",
@@ -138,7 +68,7 @@
       "github_url": "https://github.com/Deepansh-Umar/Personal-RAG",
       "live_url": "",
       "domain_category": "NLP & Large Language Models (LLMs)",
-      "complexity_rating": "High Impact Production / Research",
+      "complexity_rating": "High Impact Production / Research Project",
       "primary_language": "Python",
       "loc_estimate": 2928,
       "tech_stack": [
@@ -152,168 +82,9 @@
         "Streamlit"
       ],
       "purpose_summary": "No description provided.",
-      "key_files": [
-        ".gitignore",
-        "app.py",
-        "main.py",
-        "README.md",
-        "requirements.txt",
-        "data\\.gitkeep",
-        "output\\.gitkeep",
-        "src\\embedder.py",
-        "src\\fact_extractor.py",
-        "src\\generator.py"
-      ],
       "resume_bullets": [
         "Developed a local-first Career RAG agent combining ChromaDB vector embeddings, Ollama (Qwen2.5-Coder:3B), and Gemini API for job-tailored resume synthesis.",
         "Implemented multi-format document ingestion for PDFs, Markdown READMEs, and LaTeX files with automated skill extraction."
-      ]
-    },
-    {
-      "id": "proj_student_management",
-      "title": "Student Management",
-      "repo_name": "Student-Management",
-      "github_url": "https://github.com/Deepansh-Umar/Student-Management",
-      "live_url": "",
-      "domain_category": "NLP & Large Language Models (LLMs)",
-      "complexity_rating": "Foundation Repository",
-      "primary_language": "Java",
-      "loc_estimate": 143,
-      "tech_stack": [
-        "Java"
-      ],
-      "purpose_summary": "A CRUD-based console or GUI app to manage student information like name, roll no, branch, attendance, grades, and more.",
-      "key_files": [
-        "Main.java",
-        "README.md",
-        "Student.java",
-        "StudentService.java"
-      ],
-      "resume_bullets": [
-        "A CRUD-based console or GUI app to manage student information like name, roll no, branch, attendance, grades, and more.",
-        "Maintained clean repository architecture spanning 143 lines of code across 4 module files."
-      ]
-    },
-    {
-      "id": "proj_fcc_dawp_demo_data_analyzer",
-      "title": "Fcc Dawp Demo Data Analyzer",
-      "repo_name": "fcc-dawp-demo_data_analyzer",
-      "github_url": "https://github.com/Deepansh-Umar/fcc-dawp-demo_data_analyzer",
-      "live_url": "",
-      "domain_category": "NLP & Large Language Models (LLMs)",
-      "complexity_rating": "Foundation Repository",
-      "primary_language": "Python",
-      "loc_estimate": 159,
-      "tech_stack": [
-        "Pandas",
-        "Python"
-      ],
-      "purpose_summary": "No description provided.",
-      "key_files": [
-        "adult.data.csv",
-        "demographic_data_analyzer.py",
-        "main.py",
-        "README.md",
-        "requirements.txt",
-        "test_module.py"
-      ],
-      "resume_bullets": [
-        "Demographic Data Analyzer\n\nThis project analyzes demographic data from the 1994 Census database using Pandas.  \nIt provides insights into race distribution, education levels, income, work hours, and occupations.\n\n Proble",
-        "Maintained clean repository architecture spanning 159 lines of code across 6 module files."
-      ]
-    },
-    {
-      "id": "proj_fcc_dawp_sea_level_predictor",
-      "title": "Fcc Dawp Sea Level Predictor",
-      "repo_name": "fcc-dawp-sea_level_predictor",
-      "github_url": "https://github.com/Deepansh-Umar/fcc-dawp-sea_level_predictor",
-      "live_url": "",
-      "domain_category": "NLP & Large Language Models (LLMs)",
-      "complexity_rating": "High Impact Production / Research",
-      "primary_language": "Python",
-      "loc_estimate": 84,
-      "tech_stack": [
-        "Matplotlib",
-        "NumPy",
-        "Pandas",
-        "Python",
-        "SciPy"
-      ],
-      "purpose_summary": "No description provided.",
-      "key_files": [
-        "epa-sea-level.csv",
-        "main.py",
-        "README.md",
-        "requirements.txt",
-        "sea_level_predictor.py",
-        "test_module.py"
-      ],
-      "resume_bullets": [
-        "Sea Level Predictor\n\nThis project analyzes global average sea level change data from 1880 to the present. Using data from the **EPA**, we create visualizations and predictions to estimate sea level rise through the year ",
-        "Maintained clean repository architecture spanning 84 lines of code across 6 module files."
-      ]
-    },
-    {
-      "id": "proj_fcc_dawp_time_series_vizualizer",
-      "title": "Fcc Dawp Time Series Vizualizer",
-      "repo_name": "fcc-dawp-time_series_vizualizer",
-      "github_url": "https://github.com/Deepansh-Umar/fcc-dawp-time_series_vizualizer",
-      "live_url": "",
-      "domain_category": "NLP & Large Language Models (LLMs)",
-      "complexity_rating": "High Impact Production / Research",
-      "primary_language": "Python",
-      "loc_estimate": 219,
-      "tech_stack": [
-        "Matplotlib",
-        "NumPy",
-        "Pandas",
-        "Python",
-        "Seaborn"
-      ],
-      "purpose_summary": "No description provided.",
-      "key_files": [
-        "fcc-forum-pageviews.csv",
-        "main.py",
-        "README.md",
-        "requirements.txt",
-        "test_module.py",
-        "time_series_visualizer.py"
-      ],
-      "resume_bullets": [
-        "Page View Time Series Visualizer\n\nThis project is part of the **Data Analysis with Python** curriculum on [freeCodeCamp.org](https://www.freecodecamp.org/). The goal is to analyze and visualize time series data using Pan",
-        "Maintained clean repository architecture spanning 219 lines of code across 6 module files."
-      ]
-    },
-    {
-      "id": "proj_leetcode",
-      "title": "Leetcode",
-      "repo_name": "leetcode",
-      "github_url": "https://github.com/Deepansh-Umar/leetcode",
-      "live_url": "",
-      "domain_category": "NLP & Large Language Models (LLMs)",
-      "complexity_rating": "Medium System Application",
-      "primary_language": "Python",
-      "loc_estimate": 1346,
-      "tech_stack": [
-        "Java",
-        "Python"
-      ],
-      "purpose_summary": "A collection of LeetCode questions to ace the coding interview! - Created using [LeetHub v2](https://github.com/arunbhardwaj/LeetHub-2.0)",
-      "key_files": [
-        "README.md",
-        "stats.json",
-        "0002-add-two-numbers\\0002-add-two-numbers.py",
-        "0002-add-two-numbers\\README.md",
-        "0005-longest-palindromic-substring\\0005-longest-palindromic-substring.py",
-        "0005-longest-palindromic-substring\\README.md",
-        "0011-container-with-most-water\\0011-container-with-most-water.py",
-        "0011-container-with-most-water\\README.md",
-        "0016-3sum-closest\\0016-3sum-closest.py",
-        "0016-3sum-closest\\README.md"
-      ],
-      "resume_bullets": [
-        "A collection of LeetCode questions to ace the coding interview! - Created using [LeetHub v2](https://github.com/arunbhardwaj/LeetHub-2.0)",
-        "Maintained clean repository architecture spanning 1346 lines of code across 15 module files."
       ]
     },
     {
@@ -323,7 +94,7 @@
       "github_url": "https://github.com/Deepansh-Umar/Personal-RAG",
       "live_url": "",
       "domain_category": "NLP & Large Language Models (LLMs)",
-      "complexity_rating": "High Impact Production / Research",
+      "complexity_rating": "High Impact Production / Research Project",
       "primary_language": "Python",
       "loc_estimate": 0,
       "tech_stack": [
@@ -336,37 +107,33 @@
         "Streamlit"
       ],
       "purpose_summary": "No description provided.",
-      "key_files": [],
       "resume_bullets": [
         "Developed a local-first Career RAG agent combining ChromaDB vector embeddings, Ollama (Qwen2.5-Coder:3B), and Gemini API for job-tailored resume synthesis.",
         "Implemented multi-format document ingestion for PDFs, Markdown READMEs, and LaTeX files with automated skill extraction."
       ]
-    },
-    {
-      "id": "proj_text_sentiment_classification",
-      "title": "Text Sentiment Classification",
-      "repo_name": "text_sentiment_classification",
-      "github_url": "https://github.com/Deepansh-Umar/text_sentiment_classification",
-      "live_url": "",
-      "domain_category": "NLP & Large Language Models (LLMs)",
-      "complexity_rating": "Medium System Application",
-      "primary_language": "Jupyter Notebook",
-      "loc_estimate": 1457,
-      "tech_stack": [
-        "Jupyter Notebook"
-      ],
-      "purpose_summary": "No description provided.",
-      "key_files": [
-        "README.md",
-        "Text_sentiment_classification.ipynb"
-      ],
-      "resume_bullets": [
-        "Phrase Sentiment Analysis and Machine Learning Pipeline\n\n Project Overview\nThis project delivers an end-to-end natural language processing (NLP) and machine \nlearning classification engine built to predict sentiment prof",
-        "Maintained clean repository architecture spanning 1457 lines of code across 2 module files."
-      ]
     }
   ],
   "Web Engineering & Full-Stack Systems": [
+    {
+      "id": "proj_academic_utility_app",
+      "title": "Academic Utility App",
+      "repo_name": "Academic-Utility-App",
+      "github_url": "https://github.com/Deepansh-Umar/Academic-Utility-App",
+      "live_url": "https://academic-utility-app.vercel.app",
+      "domain_category": "Web Engineering & Full-Stack Systems",
+      "complexity_rating": "Core Application Project",
+      "primary_language": "JavaScript",
+      "loc_estimate": 665,
+      "tech_stack": [
+        "CSS",
+        "HTML",
+        "JavaScript"
+      ],
+      "purpose_summary": "No description provided.",
+      "resume_bullets": [
+        "Academic Utility App \u2013 CGPA Calculator & Grade Tools\n\n Video Demo : https://drive.google.com/file/d/1Uz8JlnSUZp0bh6ItaJ9bVOexADHLSY5C/view?usp=sharing\n Overview\n\nThis project is a browser-based academic utility applicati"
+      ]
+    },
     {
       "id": "proj_dsa_squad",
       "title": "Dsa Squad",
@@ -374,7 +141,7 @@
       "github_url": "https://github.com/Deepansh-Umar/DSA-Squad",
       "live_url": "https://dsasheet-ten.vercel.app",
       "domain_category": "Web Engineering & Full-Stack Systems",
-      "complexity_rating": "High Impact Production / Research",
+      "complexity_rating": "High Impact Production / Research Project",
       "primary_language": "JavaScript",
       "loc_estimate": 6697,
       "tech_stack": [
@@ -383,21 +150,8 @@
         "JavaScript"
       ],
       "purpose_summary": "No description provided.",
-      "key_files": [
-        ".gitignore",
-        "app.js",
-        "apple-touch-icon.png",
-        "favicon-16x16.png",
-        "favicon-32x32.png",
-        "favicon.ico",
-        "index.html",
-        "logo.png",
-        "questions.js",
-        "questions.json"
-      ],
       "resume_bullets": [
-        "<div align=\"center\">\n  <img src=\"https://raw.githubusercontent.com/Techy-prashant/images_workIITM/refs/heads/main/Form%20Headers%20(1).png\" alt=\"DSA Squad Logo\" width=\"120\" />\n  <h1>\ud83d\ude80 DSA Squad</h1>\n  <p><em>Tracking our",
-        "Maintained clean repository architecture spanning 6697 lines of code across 13 module files."
+        "<div align=\"center\">\n  <img src=\"https://raw.githubusercontent.com/Techy-prashant/images_workIITM/refs/heads/main/Form%20Headers%20(1).png\" alt=\"DSA Squad Logo\" width=\"120\" />\n  <h1>\ud83d\ude80 DSA Squad</h1>\n  <p><em>Tracking our"
       ]
     },
     {
@@ -407,7 +161,7 @@
       "github_url": "https://github.com/Deepansh-Umar/ParkEase-V2",
       "live_url": "https://parkease-v2-frontend.onrender.com/",
       "domain_category": "Web Engineering & Full-Stack Systems",
-      "complexity_rating": "High Impact Production / Research",
+      "complexity_rating": "High Impact Production / Research Project",
       "primary_language": "Vue",
       "loc_estimate": 1529,
       "tech_stack": [
@@ -425,21 +179,8 @@
         "Vue.js"
       ],
       "purpose_summary": "No description provided.",
-      "key_files": [
-        ".gitignore",
-        "README.md",
-        "backend\\app.py",
-        "backend\\celerybeat-schedule",
-        "backend\\db_setup.py",
-        "backend\\extensions.py",
-        "backend\\models.py",
-        "backend\\requirements.txt",
-        "backend\\utils.py",
-        "backend\\celery_folder\\celery_factory.py"
-      ],
       "resume_bullets": [
-        "Vue 3 + Vite\n\nThis template should help get you started developing with Vue 3 in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.htmlsfc-sc",
-        "Maintained clean repository architecture spanning 1529 lines of code across 15 module files."
+        "Vue 3 + Vite\n\nThis template should help get you started developing with Vue 3 in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.htmlsfc-sc"
       ]
     },
     {
@@ -449,7 +190,7 @@
       "github_url": "https://github.com/Deepansh-Umar/SIH-AutoHMPI",
       "live_url": "https://auto-hmpi.vercel.app",
       "domain_category": "Web Engineering & Full-Stack Systems",
-      "complexity_rating": "High Impact Production / Research",
+      "complexity_rating": "High Impact Production / Research Project",
       "primary_language": "TypeScript",
       "loc_estimate": 2080,
       "tech_stack": [
@@ -460,21 +201,8 @@
         "TypeScript"
       ],
       "purpose_summary": "No description provided.",
-      "key_files": [
-        "README.md",
-        "AutoHMPI\\sample_data.csv",
-        "AutoHMPI\\auto-hmpi-frontend\\.gitignore",
-        "AutoHMPI\\auto-hmpi-frontend\\index.html",
-        "AutoHMPI\\auto-hmpi-frontend\\package-lock.json",
-        "AutoHMPI\\auto-hmpi-frontend\\package.json",
-        "AutoHMPI\\auto-hmpi-frontend\\postcss.config.js",
-        "AutoHMPI\\auto-hmpi-frontend\\README.md",
-        "AutoHMPI\\auto-hmpi-frontend\\tailwind.config.js",
-        "AutoHMPI\\auto-hmpi-frontend\\tsconfig.app.json"
-      ],
       "resume_bullets": [
-        "Auto HMPI Frontend\n\nMinimal React + TypeScript app scaffolded with Vite and TailwindCSS.\n\n Getting Started\n\n1. Install dependencies\n```bash\nnpm install\n```\n\n2. Start the dev server\n```bash\nnpm run dev\n```\n\n Features\n- Re",
-        "Maintained clean repository architecture spanning 2080 lines of code across 15 module files."
+        "Auto HMPI Frontend\n\nMinimal React + TypeScript app scaffolded with Vite and TailwindCSS.\n\n Getting Started\n\n1. Install dependencies\n```bash\nnpm install\n```\n\n2. Start the dev server\n```bash\nnpm run dev\n```\n\n Features\n- Re"
       ]
     },
     {
@@ -484,7 +212,7 @@
       "github_url": "https://github.com/Deepansh-Umar/TDS",
       "live_url": "",
       "domain_category": "Web Engineering & Full-Stack Systems",
-      "complexity_rating": "High Impact Production / Research",
+      "complexity_rating": "High Impact Production / Research Project",
       "primary_language": "HTML",
       "loc_estimate": 12018,
       "tech_stack": [
@@ -496,21 +224,8 @@
         "REST APIs"
       ],
       "purpose_summary": "No description provided.",
-      "key_files": [
-        "GA1\\exam-tds-2026-05-ga1.js",
-        "GA1\\questions.html",
-        "GA1\\q13\\solution.txt",
-        "GA1\\q14\\solution.txt",
-        "GA1\\q18\\architecture.md",
-        "GA1\\q18\\solution.txt",
-        "GA1\\q2\\q-multi-cursor-json.txt",
-        "GA1\\q2\\solution.txt",
-        "GA1\\q20\\solution.txt",
-        "GA1\\q5\\files_to_reorganize.zip"
-      ],
       "resume_bullets": [
-        "Engineered custom software repository utilizing BeautifulSoup / Web Scraping, FastAPI, HTML.",
-        "Maintained clean repository architecture spanning 12018 lines of code across 15 module files."
+        "Engineered custom application utilizing BeautifulSoup / Web Scraping, FastAPI, HTML."
       ]
     },
     {
@@ -520,7 +235,7 @@
       "github_url": "https://github.com/Deepansh-Umar/Tesseract_IITM_CLUB",
       "live_url": "",
       "domain_category": "Web Engineering & Full-Stack Systems",
-      "complexity_rating": "High Impact Production / Research",
+      "complexity_rating": "High Impact Production / Research Project",
       "primary_language": "TypeScript",
       "loc_estimate": 82065,
       "tech_stack": [
@@ -533,21 +248,8 @@
         "TypeScript"
       ],
       "purpose_summary": "No description provided.",
-      "key_files": [
-        ".DS_Store",
-        ".gitignore",
-        "BACKEND_AUDIT.md",
-        "CLAUDE.md",
-        "DESIGN_SYSTEM.md",
-        "MIGRATION_NOTES.md",
-        "package-lock.json",
-        "package.json",
-        "playwright.config.ts",
-        "POLISH_AUDIT.md"
-      ],
       "resume_bullets": [
-        "React + TypeScript + Vite\n\nThis template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.\n\nCurrently, two official plugins are available:\n\n- [@vitejs/plugin-react](https://github.com/",
-        "Maintained clean repository architecture spanning 82065 lines of code across 15 module files."
+        "React + TypeScript + Vite\n\nThis template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.\n\nCurrently, two official plugins are available:\n\n- [@vitejs/plugin-react](https://github.com/"
       ]
     },
     {
@@ -557,7 +259,7 @@
       "github_url": "https://github.com/Deepansh-Umar/URL-shortner",
       "live_url": "https://url-shortner-zwy4.onrender.com/",
       "domain_category": "Web Engineering & Full-Stack Systems",
-      "complexity_rating": "Medium System Application",
+      "complexity_rating": "Core Application Project",
       "primary_language": "Python",
       "loc_estimate": 516,
       "tech_stack": [
@@ -567,46 +269,134 @@
         "Redis"
       ],
       "purpose_summary": "No description provided.",
-      "key_files": [
-        "config.py",
-        "init_db.py",
-        "README.md",
-        "requirements.txt",
-        "run.py",
-        "test_api.py",
-        "app\\cache_service.py",
-        "app\\models.py",
-        "app\\routes.py",
-        "app\\__init__.py"
-      ],
       "resume_bullets": [
-        "Smart URL Shortener\n\nA high-performance URL shortening service built with Flask, PostgreSQL, and Redis. Features include REST APIs, Redis caching, rate limiting, and comprehensive click analytics.\n\n Features\n\n- **URL Sho",
-        "Maintained clean repository architecture spanning 516 lines of code across 10 module files."
+        "Smart URL Shortener\n\nA high-performance URL shortening service built with Flask, PostgreSQL, and Redis. Features include REST APIs, Redis caching, rate limiting, and comprehensive click analytics.\n\n Features\n\n- **URL Sho"
       ]
     },
     {
-      "id": "proj_file_organizer",
-      "title": "File Organizer",
-      "repo_name": "file-organizer",
-      "github_url": "https://github.com/Deepansh-Umar/file-organizer",
+      "id": "proj_academic_utility_app",
+      "title": "Academic Utility App",
+      "repo_name": "academic-utility-app",
+      "github_url": "https://github.com/Deepansh-Umar/Academic-Utility-App",
+      "live_url": "https://academic-utility-app.vercel.app",
+      "domain_category": "Web Engineering & Full-Stack Systems",
+      "complexity_rating": "Targeted Utility / Academic Project",
+      "primary_language": "JavaScript",
+      "loc_estimate": 0,
+      "tech_stack": [
+        "JavaScript"
+      ],
+      "purpose_summary": "No description provided.",
+      "resume_bullets": [
+        "Engineered custom application utilizing JavaScript."
+      ]
+    },
+    {
+      "id": "proj_dsa_squad",
+      "title": "Dsa Squad",
+      "repo_name": "dsa-squad",
+      "github_url": "https://github.com/Deepansh-Umar/DSA-Squad",
+      "live_url": "https://dsasheet-ten.vercel.app",
+      "domain_category": "Web Engineering & Full-Stack Systems",
+      "complexity_rating": "Targeted Utility / Academic Project",
+      "primary_language": "JavaScript",
+      "loc_estimate": 0,
+      "tech_stack": [
+        "JavaScript"
+      ],
+      "purpose_summary": "No description provided.",
+      "resume_bullets": [
+        "Engineered custom application utilizing JavaScript."
+      ]
+    },
+    {
+      "id": "proj_parkease_v2",
+      "title": "Parkease V2",
+      "repo_name": "parkease-v2",
+      "github_url": "https://github.com/Deepansh-Umar/ParkEase-V2",
+      "live_url": "https://parkease-v2-frontend.onrender.com/",
+      "domain_category": "Web Engineering & Full-Stack Systems",
+      "complexity_rating": "Targeted Utility / Academic Project",
+      "primary_language": "Vue",
+      "loc_estimate": 0,
+      "tech_stack": [
+        "Vue"
+      ],
+      "purpose_summary": "No description provided.",
+      "resume_bullets": [
+        "Engineered custom application utilizing Vue."
+      ]
+    },
+    {
+      "id": "proj_sih_autohmpi",
+      "title": "Sih Autohmpi",
+      "repo_name": "sih-autohmpi",
+      "github_url": "https://github.com/Deepansh-Umar/SIH-AutoHMPI",
+      "live_url": "https://auto-hmpi.vercel.app",
+      "domain_category": "Web Engineering & Full-Stack Systems",
+      "complexity_rating": "Targeted Utility / Academic Project",
+      "primary_language": "TypeScript",
+      "loc_estimate": 0,
+      "tech_stack": [
+        "TypeScript"
+      ],
+      "purpose_summary": "No description provided.",
+      "resume_bullets": [
+        "Engineered custom application utilizing TypeScript."
+      ]
+    },
+    {
+      "id": "proj_tds",
+      "title": "Tds",
+      "repo_name": "tds",
+      "github_url": "https://github.com/Deepansh-Umar/TDS",
       "live_url": "",
       "domain_category": "Web Engineering & Full-Stack Systems",
-      "complexity_rating": "Foundation Repository",
+      "complexity_rating": "Targeted Utility / Academic Project",
+      "primary_language": "HTML",
+      "loc_estimate": 0,
+      "tech_stack": [
+        "HTML"
+      ],
+      "purpose_summary": "No description provided.",
+      "resume_bullets": [
+        "Engineered custom application utilizing HTML."
+      ]
+    },
+    {
+      "id": "proj_tesseract_iitm_club",
+      "title": "Tesseract Iitm Club",
+      "repo_name": "tesseract_iitm_club",
+      "github_url": "https://github.com/Deepansh-Umar/Tesseract_IITM_CLUB",
+      "live_url": "",
+      "domain_category": "Web Engineering & Full-Stack Systems",
+      "complexity_rating": "Targeted Utility / Academic Project",
+      "primary_language": "TypeScript",
+      "loc_estimate": 0,
+      "tech_stack": [
+        "TypeScript"
+      ],
+      "purpose_summary": "No description provided.",
+      "resume_bullets": [
+        "Engineered custom application utilizing TypeScript."
+      ]
+    },
+    {
+      "id": "proj_url_shortner",
+      "title": "Url Shortner",
+      "repo_name": "url-shortner",
+      "github_url": "https://github.com/Deepansh-Umar/URL-shortner",
+      "live_url": "https://url-shortner-zwy4.onrender.com/",
+      "domain_category": "Web Engineering & Full-Stack Systems",
+      "complexity_rating": "Targeted Utility / Academic Project",
       "primary_language": "Python",
-      "loc_estimate": 299,
+      "loc_estimate": 0,
       "tech_stack": [
         "Python"
       ],
-      "purpose_summary": "Automatically sorts, organizes, and categorizes files into structured folders based on their type, name, and other attributes.",
-      "key_files": [
-        ".gitignore",
-        "organizer.py",
-        "README.md",
-        "test_organizer.py"
-      ],
+      "purpose_summary": "No description provided.",
       "resume_bullets": [
-        "Automatically sorts, organizes, and categorizes files into structured folders based on their type, name, and other attributes.",
-        "Maintained clean repository architecture spanning 299 lines of code across 4 module files."
+        "Engineered custom application utilizing Python."
       ]
     },
     {
@@ -616,7 +406,7 @@
       "github_url": "https://github.com/Deepansh-Umar/zeroplast",
       "live_url": "https://zeroplast.vercel.app",
       "domain_category": "Web Engineering & Full-Stack Systems",
-      "complexity_rating": "High Impact Production / Research",
+      "complexity_rating": "High Impact Production / Research Project",
       "primary_language": "Python",
       "loc_estimate": 2242,
       "tech_stack": [
@@ -628,21 +418,8 @@
         "SQLAlchemy"
       ],
       "purpose_summary": "No description provided.",
-      "key_files": [
-        "README.md",
-        "ZeroPlast\\app_setup.py",
-        "ZeroPlast\\config.py",
-        "ZeroPlast\\db_setup.py",
-        "ZeroPlast\\main.py",
-        "ZeroPlast\\models.py",
-        "ZeroPlast\\requirements.txt",
-        "ZeroPlast\\utils.py",
-        "ZeroPlast\\vercel.json",
-        "ZeroPlast\\instance\\zeroplast.db"
-      ],
       "resume_bullets": [
-        "\u267b\ufe0f ZeroPlast: Plastic-Free Campus & Community Tracker\n\n**ZeroPlast** is a tech-driven, community-powered platform to monitor, reduce, and replace plastic usage in campuses and communities. Built with Flask and designed f",
-        "Maintained clean repository architecture spanning 2242 lines of code across 15 module files."
+        "\u267b\ufe0f ZeroPlast: Plastic-Free Campus & Community Tracker\n\n**ZeroPlast** is a tech-driven, community-powered platform to monitor, reduce, and replace plastic usage in campuses and communities. Built with Flask and designed f"
       ]
     }
   ],
@@ -654,7 +431,7 @@
       "github_url": "https://github.com/Deepansh-Umar/Diabetes-Prediction",
       "live_url": "",
       "domain_category": "Data Science & Analytics",
-      "complexity_rating": "High Impact Production / Research",
+      "complexity_rating": "High Impact Production / Research Project",
       "primary_language": "Python",
       "loc_estimate": 63,
       "tech_stack": [
@@ -666,15 +443,26 @@
         "Seaborn"
       ],
       "purpose_summary": "No description provided.",
-      "key_files": [
-        "diabetes.csv",
-        "main.py",
-        "README.md",
-        "requirements.txt"
-      ],
       "resume_bullets": [
-        "Diabetes Prediction\n\nThis project predicts the likelihood of diabetes using a public dataset and scikit-learn. \n\n  Dataset\n- [PIMA Indian Diabetes Dataset](https://www.kaggle.com/datasets/uciml/pima-indians-diabetes-data",
-        "Maintained clean repository architecture spanning 63 lines of code across 4 module files."
+        "Diabetes Prediction\n\nThis project predicts the likelihood of diabetes using a public dataset and scikit-learn. \n\n  Dataset\n- [PIMA Indian Diabetes Dataset](https://www.kaggle.com/datasets/uciml/pima-indians-diabetes-data"
+      ]
+    },
+    {
+      "id": "proj_heavy_machine_price_prediction",
+      "title": "Heavy Machine Price Prediction",
+      "repo_name": "Heavy-Machine-Price-Prediction",
+      "github_url": "https://github.com/Deepansh-Umar/Heavy-Machine-Price-Prediction",
+      "live_url": "",
+      "domain_category": "Data Science & Analytics",
+      "complexity_rating": "Targeted Utility / Academic Project",
+      "primary_language": "Jupyter Notebook",
+      "loc_estimate": 1,
+      "tech_stack": [
+        "Jupyter Notebook"
+      ],
+      "purpose_summary": "No description provided.",
+      "resume_bullets": [
+        "Heavy Machine Price Prediction\n\nThis repository contains the dataset and machine learning solution for predicting the selling price of heavy industrial machinery and equipment lifecycles.\n\n Project Overview\n\nThe dataset "
       ]
     },
     {
@@ -684,7 +472,7 @@
       "github_url": "https://github.com/Deepansh-Umar/MLP",
       "live_url": "",
       "domain_category": "Data Science & Analytics",
-      "complexity_rating": "High Impact Production / Research",
+      "complexity_rating": "High Impact Production / Research Project",
       "primary_language": "Jupyter Notebook",
       "loc_estimate": 6622,
       "tech_stack": [
@@ -695,48 +483,64 @@
         "Scikit-Learn"
       ],
       "purpose_summary": "This is a all in one repo for my MLP theory course at IITM BS",
-      "key_files": [
-        "guide-to-all-basics.md",
-        "README.md",
-        "week1\\week1_ga_1_2.ipynb",
-        "week1\\Week1_GA_dataset.csv",
-        "week1\\weel1_ga_1_1.ipynb",
-        "week2\\GA_2_dataset.csv",
-        "week2\\week2_ga.ipynb",
-        "week3\\week3_ga.ipynb",
-        "week3\\Week3_GA_dataset.csv"
-      ],
       "resume_bullets": [
         "Developed machine learning workflows for IIT Madras BS Machine Learning Practice course, covering supervised models, decision trees, and ensemble methods.",
         "Implemented exploratory data analysis (EDA), data cleaning, feature scaling, and performance evaluation metrics across structured datasets."
       ]
     },
     {
-      "id": "proj_resources",
-      "title": "Resources",
-      "repo_name": "Resources",
-      "github_url": "https://github.com/Deepansh-Umar/Resources",
+      "id": "proj_california_housing_price_prediction",
+      "title": "California Housing Price Prediction",
+      "repo_name": "california_housing_price_prediction",
+      "github_url": "https://github.com/Deepansh-Umar/california_housing_price_prediction",
       "live_url": "",
       "domain_category": "Data Science & Analytics",
-      "complexity_rating": "Foundation Repository",
-      "primary_language": "N/A",
-      "loc_estimate": 0,
-      "tech_stack": [],
-      "purpose_summary": "Detailed Roadmap of all technologies from scratch.",
-      "key_files": [
-        "AIML.md",
-        "AppDev.md",
-        "BackEndDev.md",
-        "Cybersecurity.md",
-        "Data Science.md",
-        "DigitalMarketing.md",
-        "FrontEndDev.md",
-        "GraphicDesign.md",
-        "README.md",
-        "Roblox.md"
+      "complexity_rating": "Targeted Utility / Academic Project",
+      "primary_language": "Jupyter Notebook",
+      "loc_estimate": 1,
+      "tech_stack": [
+        "Jupyter Notebook"
       ],
+      "purpose_summary": "No description provided.",
       "resume_bullets": [
-        "Detailed Roadmap of all technologies from scratch."
+        "\ud83c\udfe1 California Housing Price Prediction\n\nThis project predicts **median house values** in California districts using **Machine Learning**.  \nThe dataset contains housing, population, and income features, along with categor"
+      ]
+    },
+    {
+      "id": "proj_diabetes_prediction",
+      "title": "Diabetes Prediction",
+      "repo_name": "diabetes-prediction",
+      "github_url": "https://github.com/Deepansh-Umar/Diabetes-Prediction",
+      "live_url": "",
+      "domain_category": "Data Science & Analytics",
+      "complexity_rating": "Targeted Utility / Academic Project",
+      "primary_language": "Python",
+      "loc_estimate": 0,
+      "tech_stack": [
+        "Python"
+      ],
+      "purpose_summary": "No description provided.",
+      "resume_bullets": [
+        "Engineered custom application utilizing Python."
+      ]
+    },
+    {
+      "id": "proj_fcc_dawp_demo_data_analyzer",
+      "title": "Fcc Dawp Demo Data Analyzer",
+      "repo_name": "fcc-dawp-demo_data_analyzer",
+      "github_url": "https://github.com/Deepansh-Umar/fcc-dawp-demo_data_analyzer",
+      "live_url": "",
+      "domain_category": "Data Science & Analytics",
+      "complexity_rating": "Targeted Utility / Academic Project",
+      "primary_language": "Python",
+      "loc_estimate": 159,
+      "tech_stack": [
+        "Pandas",
+        "Python"
+      ],
+      "purpose_summary": "No description provided.",
+      "resume_bullets": [
+        "Demographic Data Analyzer\n\nThis project analyzes demographic data from the 1994 Census database using Pandas.  \nIt provides insights into race distribution, education levels, income, work hours, and occupations.\n\n Proble"
       ]
     },
     {
@@ -746,7 +550,7 @@
       "github_url": "https://github.com/Deepansh-Umar/fcc-dawp-mean-std-dev",
       "live_url": "",
       "domain_category": "Data Science & Analytics",
-      "complexity_rating": "Foundation Repository",
+      "complexity_rating": "Targeted Utility / Academic Project",
       "primary_language": "Python",
       "loc_estimate": 55,
       "tech_stack": [
@@ -754,16 +558,8 @@
         "Python"
       ],
       "purpose_summary": "No description provided.",
-      "key_files": [
-        "main.py",
-        "mean_var_std.py",
-        "README.md",
-        "requirements.txt",
-        "test-module.py"
-      ],
       "resume_bullets": [
-        "Mean-Variance-Standard Deviation Calculator\n\nThis project calculates the mean, variance, standard deviation, max, min, and sum of the rows, columns, and flattened elements of a 3x3 matrix using **Numpy**.\n\n Problem State",
-        "Maintained clean repository architecture spanning 55 lines of code across 5 module files."
+        "Mean-Variance-Standard Deviation Calculator\n\nThis project calculates the mean, variance, standard deviation, max, min, and sum of the rows, columns, and flattened elements of a 3x3 matrix using **Numpy**.\n\n Problem State"
       ]
     },
     {
@@ -773,7 +569,7 @@
       "github_url": "https://github.com/Deepansh-Umar/fcc-dawp-medical_data_visualizer",
       "live_url": "",
       "domain_category": "Data Science & Analytics",
-      "complexity_rating": "High Impact Production / Research",
+      "complexity_rating": "High Impact Production / Research Project",
       "primary_language": "Python",
       "loc_estimate": 122,
       "tech_stack": [
@@ -784,17 +580,70 @@
         "Seaborn"
       ],
       "purpose_summary": "No description provided.",
-      "key_files": [
-        "main.py",
-        "medical_data_visualizer.py",
-        "medical_examination.csv",
-        "README.md",
-        "requirements.txt",
-        "test_module.py"
-      ],
       "resume_bullets": [
-        "Medical Data Visualizer\n\nThis project analyzes and visualizes medical examination data to explore the relationship between cardiovascular disease and various health and lifestyle factors. It uses Python with **Pandas**, ",
-        "Maintained clean repository architecture spanning 122 lines of code across 6 module files."
+        "Medical Data Visualizer\n\nThis project analyzes and visualizes medical examination data to explore the relationship between cardiovascular disease and various health and lifestyle factors. It uses Python with **Pandas**, "
+      ]
+    },
+    {
+      "id": "proj_fcc_dawp_sea_level_predictor",
+      "title": "Fcc Dawp Sea Level Predictor",
+      "repo_name": "fcc-dawp-sea_level_predictor",
+      "github_url": "https://github.com/Deepansh-Umar/fcc-dawp-sea_level_predictor",
+      "live_url": "",
+      "domain_category": "Data Science & Analytics",
+      "complexity_rating": "High Impact Production / Research Project",
+      "primary_language": "Python",
+      "loc_estimate": 84,
+      "tech_stack": [
+        "Matplotlib",
+        "NumPy",
+        "Pandas",
+        "Python",
+        "SciPy"
+      ],
+      "purpose_summary": "No description provided.",
+      "resume_bullets": [
+        "Sea Level Predictor\n\nThis project analyzes global average sea level change data from 1880 to the present. Using data from the **EPA**, we create visualizations and predictions to estimate sea level rise through the year "
+      ]
+    },
+    {
+      "id": "proj_fcc_dawp_time_series_vizualizer",
+      "title": "Fcc Dawp Time Series Vizualizer",
+      "repo_name": "fcc-dawp-time_series_vizualizer",
+      "github_url": "https://github.com/Deepansh-Umar/fcc-dawp-time_series_vizualizer",
+      "live_url": "",
+      "domain_category": "Data Science & Analytics",
+      "complexity_rating": "High Impact Production / Research Project",
+      "primary_language": "Python",
+      "loc_estimate": 219,
+      "tech_stack": [
+        "Matplotlib",
+        "NumPy",
+        "Pandas",
+        "Python",
+        "Seaborn"
+      ],
+      "purpose_summary": "No description provided.",
+      "resume_bullets": [
+        "Page View Time Series Visualizer\n\nThis project is part of the **Data Analysis with Python** curriculum on [freeCodeCamp.org](https://www.freecodecamp.org/). The goal is to analyze and visualize time series data using Pan"
+      ]
+    },
+    {
+      "id": "proj_heavy_machine_price_prediction",
+      "title": "Heavy Machine Price Prediction",
+      "repo_name": "heavy-machine-price-prediction",
+      "github_url": "https://github.com/Deepansh-Umar/Heavy-Machine-Price-Prediction",
+      "live_url": "",
+      "domain_category": "Data Science & Analytics",
+      "complexity_rating": "Targeted Utility / Academic Project",
+      "primary_language": "Jupyter Notebook",
+      "loc_estimate": 0,
+      "tech_stack": [
+        "Jupyter Notebook"
+      ],
+      "purpose_summary": "No description provided.",
+      "resume_bullets": [
+        "Engineered custom application utilizing Jupyter Notebook."
       ]
     },
     {
@@ -804,7 +653,7 @@
       "github_url": "https://github.com/Deepansh-Umar/MLP",
       "live_url": "",
       "domain_category": "Data Science & Analytics",
-      "complexity_rating": "High Impact Production / Research",
+      "complexity_rating": "High Impact Production / Research Project",
       "primary_language": "Jupyter Notebook",
       "loc_estimate": 0,
       "tech_stack": [
@@ -815,56 +664,29 @@
         "Scikit-Learn"
       ],
       "purpose_summary": "This is a all in one repo for my MLP theory course at IITM BS",
-      "key_files": [],
       "resume_bullets": [
         "Developed machine learning workflows for IIT Madras BS Machine Learning Practice course, covering supervised models, decision trees, and ensemble methods.",
         "Implemented exploratory data analysis (EDA), data cleaning, feature scaling, and performance evaluation metrics across structured datasets."
       ]
     }
   ],
-  "Data Structures & Algorithms / Problem Solving": [
-    {
-      "id": "proj_dsa_squad",
-      "title": "Dsa Squad",
-      "repo_name": "dsa-squad",
-      "github_url": "https://github.com/Deepansh-Umar/DSA-Squad",
-      "live_url": "https://dsasheet-ten.vercel.app",
-      "domain_category": "Data Structures & Algorithms / Problem Solving",
-      "complexity_rating": "Foundation Repository",
-      "primary_language": "JavaScript",
-      "loc_estimate": 0,
-      "tech_stack": [
-        "JavaScript"
-      ],
-      "purpose_summary": "No description provided.",
-      "key_files": [],
-      "resume_bullets": [
-        "Engineered custom software repository utilizing JavaScript."
-      ]
-    }
-  ],
-  "System Utilities & Automation": [
+  "System Utilities & Software Tools": [
     {
       "id": "proj_hospital_management",
       "title": "Hospital Management",
       "repo_name": "Hospital-Management",
       "github_url": "https://github.com/Deepansh-Umar/Hospital-Management",
       "live_url": "",
-      "domain_category": "System Utilities & Automation",
-      "complexity_rating": "Foundation Repository",
+      "domain_category": "System Utilities & Software Tools",
+      "complexity_rating": "Targeted Utility / Academic Project",
       "primary_language": "Python",
       "loc_estimate": 85,
       "tech_stack": [
         "Python"
       ],
       "purpose_summary": "A CRUD-based console or GUI app to manage hospital information like name, medication, appointments, scheduling, and more.",
-      "key_files": [
-        "hospital.py",
-        "README.md"
-      ],
       "resume_bullets": [
-        "A CRUD-based console or GUI app to manage hospital information like name, medication, appointments, scheduling, and more.",
-        "Maintained clean repository architecture spanning 85 lines of code across 2 module files."
+        "A CRUD-based console or GUI app to manage hospital information like name, medication, appointments, scheduling, and more."
       ]
     },
     {
@@ -873,84 +695,34 @@
       "repo_name": "Nirmaan-OS",
       "github_url": "https://github.com/Deepansh-Umar/Nirmaan-OS",
       "live_url": "",
-      "domain_category": "System Utilities & Automation",
-      "complexity_rating": "Foundation Repository",
+      "domain_category": "System Utilities & Software Tools",
+      "complexity_rating": "Targeted Utility / Academic Project",
       "primary_language": "C",
       "loc_estimate": 69,
       "tech_stack": [
         "C"
       ],
       "purpose_summary": "This Repo is to track the learning progress of each Teammate.",
-      "key_files": [
-        "README.md",
-        "Core Team\\AI-ML Team\\AnuragB\\temp",
-        "Core Team\\AI-ML Team\\Devansh\\Basic_info.txt",
-        "Core Team\\AI-ML Team\\Prashant\\temp",
-        "Core Team\\AI-ML Team\\Renuka Sindhura\\Renuka",
-        "Core Team\\AI-ML Team\\Stuti\\.gitkeep",
-        "Core Team\\Kernel Team\\Deepansh Umar\\Intro.txt",
-        "Core Team\\Kernel Team\\Deepansh Umar\\OS and CSA.md",
-        "Core Team\\Kernel Team\\Nitish_Bhatt\\Exploring_C\\Hello.c",
-        "Core Team\\Kernel Team\\Nitish_Bhatt\\Exploring_C\\Hello.exe"
-      ],
       "resume_bullets": [
-        "This Repo is to track the learning progress of each Teammate.",
-        "Maintained clean repository architecture spanning 69 lines of code across 15 module files."
+        "This Repo is to track the learning progress of each Teammate."
       ]
     },
     {
-      "id": "proj_academic_utility_app",
-      "title": "Academic Utility App",
-      "repo_name": "academic-utility-app",
-      "github_url": "https://github.com/Deepansh-Umar/Academic-Utility-App",
-      "live_url": "https://academic-utility-app.vercel.app",
-      "domain_category": "System Utilities & Automation",
-      "complexity_rating": "Foundation Repository",
-      "primary_language": "JavaScript",
-      "loc_estimate": 0,
-      "tech_stack": [
-        "JavaScript"
-      ],
-      "purpose_summary": "No description provided.",
-      "key_files": [],
-      "resume_bullets": [
-        "Engineered custom software repository utilizing JavaScript."
-      ]
-    },
-    {
-      "id": "proj_deepansh_umar",
-      "title": "Deepansh Umar",
-      "repo_name": "deepansh-umar",
-      "github_url": "https://github.com/Deepansh-Umar/Deepansh-Umar",
+      "id": "proj_student_management",
+      "title": "Student Management",
+      "repo_name": "Student-Management",
+      "github_url": "https://github.com/Deepansh-Umar/Student-Management",
       "live_url": "",
-      "domain_category": "System Utilities & Automation",
-      "complexity_rating": "Foundation Repository",
-      "primary_language": "N/A",
-      "loc_estimate": 0,
-      "tech_stack": [],
-      "purpose_summary": "No description provided.",
-      "key_files": [],
-      "resume_bullets": [
-        "Engineered custom software repository utilizing modern programming principles."
-      ]
-    },
-    {
-      "id": "proj_diabetes_prediction",
-      "title": "Diabetes Prediction",
-      "repo_name": "diabetes-prediction",
-      "github_url": "https://github.com/Deepansh-Umar/Diabetes-Prediction",
-      "live_url": "",
-      "domain_category": "System Utilities & Automation",
-      "complexity_rating": "Foundation Repository",
-      "primary_language": "Python",
-      "loc_estimate": 0,
+      "domain_category": "System Utilities & Software Tools",
+      "complexity_rating": "Targeted Utility / Academic Project",
+      "primary_language": "Java",
+      "loc_estimate": 143,
       "tech_stack": [
-        "Python"
+        "Java"
       ],
-      "purpose_summary": "No description provided.",
-      "key_files": [],
+      "purpose_summary": "A CRUD-based console or GUI app to manage student information like name, roll no, branch, attendance, grades, and more.",
       "resume_bullets": [
-        "Engineered custom software repository utilizing Python."
+        "A CRUD-based console or GUI app to manage student information like name, roll no, branch, attendance, grades, and more."
       ]
     },
     {
@@ -959,22 +731,16 @@
       "repo_name": "fcc-scwp-polygon-area",
       "github_url": "https://github.com/Deepansh-Umar/fcc-scwp-polygon-area",
       "live_url": "",
-      "domain_category": "System Utilities & Automation",
-      "complexity_rating": "Foundation Repository",
+      "domain_category": "System Utilities & Software Tools",
+      "complexity_rating": "Targeted Utility / Academic Project",
       "primary_language": "Python",
       "loc_estimate": 66,
       "tech_stack": [
         "Python"
       ],
       "purpose_summary": "No description provided.",
-      "key_files": [
-        "main.py",
-        "README.md",
-        "test_module.py"
-      ],
       "resume_bullets": [
-        "Project 5: Polygon Area Calculator\n\nThis project involves creating a `Rectangle` and `Square` class that can return properties such as area, perimeter, and more.\n\n Files\n\n- `main.py`: Contains the `Rectangle` and `Square",
-        "Maintained clean repository architecture spanning 66 lines of code across 3 module files."
+        "Project 5: Polygon Area Calculator\n\nThis project involves creating a `Rectangle` and `Square` class that can return properties such as area, perimeter, and more.\n\n Files\n\n- `main.py`: Contains the `Rectangle` and `Square"
       ]
     },
     {
@@ -983,72 +749,34 @@
       "repo_name": "fcc-scwp-probability-calc",
       "github_url": "https://github.com/Deepansh-Umar/fcc-scwp-probability-calc",
       "live_url": "",
-      "domain_category": "System Utilities & Automation",
-      "complexity_rating": "Foundation Repository",
+      "domain_category": "System Utilities & Software Tools",
+      "complexity_rating": "Targeted Utility / Academic Project",
       "primary_language": "Python",
       "loc_estimate": 50,
       "tech_stack": [
         "Python"
       ],
       "purpose_summary": "No description provided.",
-      "key_files": [
-        "main.py",
-        "README.md",
-        "test_module.py"
-      ],
       "resume_bullets": [
-        "Project 4: Probability Calculator\n\nThis project simulates a hat containing colored balls. You can draw a number of balls from the hat, and calculate the probability of drawing certain combinations.\n\n Files\n\n- `main.py`: ",
-        "Maintained clean repository architecture spanning 50 lines of code across 3 module files."
+        "Project 4: Probability Calculator\n\nThis project simulates a hat containing colored balls. You can draw a number of balls from the hat, and calculate the probability of drawing certain combinations.\n\n Files\n\n- `main.py`: "
       ]
     },
     {
-      "id": "proj_gcc_bose_cgit",
-      "title": "Gcc Bose Cgit",
-      "repo_name": "gcc-bose-cgit",
-      "github_url": "https://github.com/Deepansh-Umar/gcc-bose-cgit",
+      "id": "proj_file_organizer",
+      "title": "File Organizer",
+      "repo_name": "file-organizer",
+      "github_url": "https://github.com/Deepansh-Umar/file-organizer",
       "live_url": "",
-      "domain_category": "System Utilities & Automation",
-      "complexity_rating": "High Impact Production / Research",
-      "primary_language": "HTML",
-      "loc_estimate": 22206,
+      "domain_category": "System Utilities & Software Tools",
+      "complexity_rating": "Targeted Utility / Academic Project",
+      "primary_language": "Python",
+      "loc_estimate": 299,
       "tech_stack": [
-        "HTML"
+        "Python"
       ],
-      "purpose_summary": "No description provided.",
-      "key_files": [
-        ".DS_Store",
-        "Bose GCC RFI Response.pdf",
-        "bose-gcc-fixed-v4-stable 1.html",
-        "chrome_err.txt",
-        "ConglomerateIT_India_GCC_RFI Response_Bose.docx",
-        "docx_extracted.txt",
-        "logo.png",
-        "Main.html",
-        "pdf_extracted.txt",
-        "section 1.html"
-      ],
+      "purpose_summary": "Automatically sorts, organizes, and categorizes files into structured folders based on their type, name, and other attributes.",
       "resume_bullets": [
-        "Engineered custom software repository utilizing HTML.",
-        "Maintained clean repository architecture spanning 22206 lines of code across 13 module files."
-      ]
-    },
-    {
-      "id": "proj_heavy_machine_price_prediction",
-      "title": "Heavy Machine Price Prediction",
-      "repo_name": "heavy-machine-price-prediction",
-      "github_url": "https://github.com/Deepansh-Umar/Heavy-Machine-Price-Prediction",
-      "live_url": "",
-      "domain_category": "System Utilities & Automation",
-      "complexity_rating": "Foundation Repository",
-      "primary_language": "Jupyter Notebook",
-      "loc_estimate": 0,
-      "tech_stack": [
-        "Jupyter Notebook"
-      ],
-      "purpose_summary": "No description provided.",
-      "key_files": [],
-      "resume_bullets": [
-        "Engineered custom software repository utilizing Jupyter Notebook."
+        "Automatically sorts, organizes, and categorizes files into structured folders based on their type, name, and other attributes."
       ]
     },
     {
@@ -1057,36 +785,16 @@
       "repo_name": "hospital-management",
       "github_url": "https://github.com/Deepansh-Umar/Hospital-Management",
       "live_url": "",
-      "domain_category": "System Utilities & Automation",
-      "complexity_rating": "Foundation Repository",
+      "domain_category": "System Utilities & Software Tools",
+      "complexity_rating": "Targeted Utility / Academic Project",
       "primary_language": "Python",
       "loc_estimate": 0,
       "tech_stack": [
         "Python"
       ],
       "purpose_summary": "A CRUD-based console or GUI app to manage hospital information like name, medication, appointments, scheduling, and more.",
-      "key_files": [],
       "resume_bullets": [
         "A CRUD-based console or GUI app to manage hospital information like name, medication, appointments, scheduling, and more."
-      ]
-    },
-    {
-      "id": "proj_mcq_solver",
-      "title": "Mcq Solver",
-      "repo_name": "mcq-solver",
-      "github_url": "https://github.com/Deepansh-Umar/MCQ-Solver",
-      "live_url": "",
-      "domain_category": "System Utilities & Automation",
-      "complexity_rating": "Foundation Repository",
-      "primary_language": "Python",
-      "loc_estimate": 0,
-      "tech_stack": [
-        "Python"
-      ],
-      "purpose_summary": "No description provided.",
-      "key_files": [],
-      "resume_bullets": [
-        "Engineered custom software repository utilizing Python."
       ]
     },
     {
@@ -1095,72 +803,16 @@
       "repo_name": "nirmaan-os",
       "github_url": "https://github.com/Deepansh-Umar/Nirmaan-OS",
       "live_url": "",
-      "domain_category": "System Utilities & Automation",
-      "complexity_rating": "Foundation Repository",
+      "domain_category": "System Utilities & Software Tools",
+      "complexity_rating": "Targeted Utility / Academic Project",
       "primary_language": "C",
       "loc_estimate": 0,
       "tech_stack": [
         "C"
       ],
       "purpose_summary": "This Repo is to track the learning progress of each Teammate.",
-      "key_files": [],
       "resume_bullets": [
         "This Repo is to track the learning progress of each Teammate."
-      ]
-    },
-    {
-      "id": "proj_parkease_v2",
-      "title": "Parkease V2",
-      "repo_name": "parkease-v2",
-      "github_url": "https://github.com/Deepansh-Umar/ParkEase-V2",
-      "live_url": "https://parkease-v2-frontend.onrender.com/",
-      "domain_category": "System Utilities & Automation",
-      "complexity_rating": "Foundation Repository",
-      "primary_language": "Vue",
-      "loc_estimate": 0,
-      "tech_stack": [
-        "Vue"
-      ],
-      "purpose_summary": "No description provided.",
-      "key_files": [],
-      "resume_bullets": [
-        "Engineered custom software repository utilizing Vue."
-      ]
-    },
-    {
-      "id": "proj_resources",
-      "title": "Resources",
-      "repo_name": "resources",
-      "github_url": "https://github.com/Deepansh-Umar/Resources",
-      "live_url": "",
-      "domain_category": "System Utilities & Automation",
-      "complexity_rating": "Foundation Repository",
-      "primary_language": "N/A",
-      "loc_estimate": 0,
-      "tech_stack": [],
-      "purpose_summary": "Detailed Roadmap of all technologies from scratch.",
-      "key_files": [],
-      "resume_bullets": [
-        "Detailed Roadmap of all technologies from scratch."
-      ]
-    },
-    {
-      "id": "proj_sih_autohmpi",
-      "title": "Sih Autohmpi",
-      "repo_name": "sih-autohmpi",
-      "github_url": "https://github.com/Deepansh-Umar/SIH-AutoHMPI",
-      "live_url": "https://auto-hmpi.vercel.app",
-      "domain_category": "System Utilities & Automation",
-      "complexity_rating": "Foundation Repository",
-      "primary_language": "TypeScript",
-      "loc_estimate": 0,
-      "tech_stack": [
-        "TypeScript"
-      ],
-      "purpose_summary": "No description provided.",
-      "key_files": [],
-      "resume_bullets": [
-        "Engineered custom software repository utilizing TypeScript."
       ]
     },
     {
@@ -1169,74 +821,16 @@
       "repo_name": "student-management",
       "github_url": "https://github.com/Deepansh-Umar/Student-Management",
       "live_url": "",
-      "domain_category": "System Utilities & Automation",
-      "complexity_rating": "Foundation Repository",
+      "domain_category": "System Utilities & Software Tools",
+      "complexity_rating": "Targeted Utility / Academic Project",
       "primary_language": "Java",
       "loc_estimate": 0,
       "tech_stack": [
         "Java"
       ],
       "purpose_summary": "A CRUD-based console or GUI app to manage student information like name, roll no, branch, attendance, grades, and more.",
-      "key_files": [],
       "resume_bullets": [
         "A CRUD-based console or GUI app to manage student information like name, roll no, branch, attendance, grades, and more."
-      ]
-    },
-    {
-      "id": "proj_tds",
-      "title": "Tds",
-      "repo_name": "tds",
-      "github_url": "https://github.com/Deepansh-Umar/TDS",
-      "live_url": "",
-      "domain_category": "System Utilities & Automation",
-      "complexity_rating": "Foundation Repository",
-      "primary_language": "HTML",
-      "loc_estimate": 0,
-      "tech_stack": [
-        "HTML"
-      ],
-      "purpose_summary": "No description provided.",
-      "key_files": [],
-      "resume_bullets": [
-        "Engineered custom software repository utilizing HTML."
-      ]
-    },
-    {
-      "id": "proj_tesseract_iitm_club",
-      "title": "Tesseract Iitm Club",
-      "repo_name": "tesseract_iitm_club",
-      "github_url": "https://github.com/Deepansh-Umar/Tesseract_IITM_CLUB",
-      "live_url": "",
-      "domain_category": "System Utilities & Automation",
-      "complexity_rating": "Foundation Repository",
-      "primary_language": "TypeScript",
-      "loc_estimate": 0,
-      "tech_stack": [
-        "TypeScript"
-      ],
-      "purpose_summary": "No description provided.",
-      "key_files": [],
-      "resume_bullets": [
-        "Engineered custom software repository utilizing TypeScript."
-      ]
-    },
-    {
-      "id": "proj_url_shortner",
-      "title": "Url Shortner",
-      "repo_name": "url-shortner",
-      "github_url": "https://github.com/Deepansh-Umar/URL-shortner",
-      "live_url": "https://url-shortner-zwy4.onrender.com/",
-      "domain_category": "System Utilities & Automation",
-      "complexity_rating": "Foundation Repository",
-      "primary_language": "Python",
-      "loc_estimate": 0,
-      "tech_stack": [
-        "Python"
-      ],
-      "purpose_summary": "No description provided.",
-      "key_files": [],
-      "resume_bullets": [
-        "Engineered custom software repository utilizing Python."
       ]
     }
   ]
